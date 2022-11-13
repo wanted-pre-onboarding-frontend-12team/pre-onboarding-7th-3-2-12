@@ -1,4 +1,6 @@
+import { BankAccount } from './page';
+
 const App = () => {
-	return <div className="text-orange-700">App</div>;
+	return <BankAccount />;
 };
 export default App;
