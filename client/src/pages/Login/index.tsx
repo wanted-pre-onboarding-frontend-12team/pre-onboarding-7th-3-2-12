@@ -36,7 +36,7 @@ const Login = () => {
 						</button>
 					</div>
 				</form>
-				<footer className="flex justify-center py-5 ">© December and Company</footer>
+				<footer className="flex justify-center py-5 ">Copyright © December and Company</footer>
 			</div>
 		</div>
 	);

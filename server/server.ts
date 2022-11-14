@@ -4,7 +4,6 @@ const cors = require("cors");
 
 const app = jsonServer.create();
 const router = jsonServer.router("db.json");
-
 app.use(cors({ origin: "*" }));
 app.db = router.db;
 const rules = auth.rewriter({

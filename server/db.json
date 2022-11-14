@@ -1601,16 +1601,11 @@
       "updated_at": "2020-08-03T18:53:20.063Z"
     },
     {
-      "email": "youngmin@email.com",
+      "id": 101,
+      "email": "admin@email.com",
       "password": "$2a$10$dsYrGBQbzlQPP4lmmSkez.RkUp7O5qd.yuhpOhzp8l82vuf9IzUhy",
-      "id": 101
+      "name": "관리자"
     },
-    {
-      "email": "youngmini@email.com",
-      "password": "$2a$10$gw9bjTpXgVZTJSGkZklVy.dJZ50SFc121oMZrALw2EZLYHuLtknYy",
-      "name": "youngmin",
-      "id": 102
-    }
   ],
   "userSetting": [
     {
