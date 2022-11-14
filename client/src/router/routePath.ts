@@ -1,8 +1,8 @@
 const ROUTE_PATHS = {
 	DASHBOARD: '/',
-	LOG_IN: '/login',
-	USER_LIST: '/users',
-	ACCOUNT_LIST: '/accounts',
+	LOGIN: '/login',
+	USERS: '/users',
+	ACCOUNTS: '/accounts',
 	NOT_FOUND: '*',
 } as const;
 
