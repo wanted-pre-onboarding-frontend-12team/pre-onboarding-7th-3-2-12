@@ -1,5 +1,5 @@
 import { AccountGrid, DropDown, SearchInput } from '../components';
-import { getAccountList } from '../api/bankAccount';
+import { getAccountList } from '../apis/bankAccount';
 import { useEffect, useState } from 'react';
 
 const BankAccount = () => {
