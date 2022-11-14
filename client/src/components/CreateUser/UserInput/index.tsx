@@ -6,22 +6,23 @@ type Props = {
 	type?: 'text' | 'date' | 'number' | 'tel' | 'email' | 'file';
 	accept?: 'image/*';
 	readOnly?: boolean;
+	width?: string;
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	onClick?: (event: React.MouseEventHandler<HTMLInputElement>) => void;
 	children: React.ReactNode;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const UserInput = (
-	{ name, id, type = 'text', onChange, onClick, children, readOnly = false }: Props,
+	{ name, id, type = 'text', onChange, onClick, children, readOnly = false, width }: Props,
 	ref: React.Ref<HTMLInputElement>,
 ) => {
 	return (
-		<div className="flex flex-col mb-[8px]">
-			<label htmlFor={id} className="mb-[6px]">
+		<div className="flex">
+			<label htmlFor={id} className="w-[200px] mb-[6px]">
 				{children}
 			</label>
 			<input
-				className="border-solid border-2 border-slate-400"
+				className={`border-solid border-2 border-slate-400 ${width}`}
 				ref={ref}
 				name={name}
 				id={id}
