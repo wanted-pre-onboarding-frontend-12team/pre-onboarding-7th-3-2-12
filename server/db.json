@@ -1599,6 +1599,16 @@
       "last_login": "2022-03-30T14:58:33.114Z",
       "created_at": "2021-06-13T12:37:53.374Z",
       "updated_at": "2020-08-03T18:53:20.063Z"
+    },
+    {
+      "email": "seungmin1234@gmail.com",
+      "password": "$2a$10$4pIaPYPpksag.X5WH445EeWwPibaVMOA7WnTRCy31Gy2hCtz2hpV6",
+      "id": 101
+    },
+    {
+      "email": "seungin12@gmail.com",
+      "password": "$2a$10$j8jzKgN3JBp8gCvxKSvqvurEMLMykvwicCAQCS8DfQIjHUWPIM/zO",
+      "id": 102
     }
   ],
   "userSetting": [
@@ -7727,6 +7737,9 @@
       "is_active": false,
       "created_at": "2021-09-01T11:25:21.818Z",
       "updated_at": "2021-07-01T14:35:50.303Z"
+    },
+    {
+      "id": 9
     }
   ]
 }

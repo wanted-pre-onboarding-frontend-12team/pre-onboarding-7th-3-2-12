@@ -1,6 +1,6 @@
-import { BankAccount } from './page';
+import Router from './router/index';
 
 const App = () => {
-	return <BankAccount />;
+	return <Router />;
 };
 export default App;

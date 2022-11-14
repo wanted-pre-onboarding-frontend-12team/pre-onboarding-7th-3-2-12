@@ -1,8 +1,16 @@
 import { AccountGrid, DropDown, SearchInput } from '../components';
+import { getAccountList } from '../api/bankAccount';
+import { useEffect } from 'react';
 
 const BankAccount = () => {
+	useEffect(() => {
+		getAccountList().then((res) => {
+			console.log(res);
+		});
+	}, []);
+
 	return (
-		<main className="p-8 bg-gray-200">
+		<main className="p-8">
 			<div className="flex justify-between ">
 				<div>
 					<DropDown list={BROKER} />
