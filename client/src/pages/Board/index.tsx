@@ -1,5 +1,5 @@
 import { Sidebar, Header, Footer } from '../../components';
-import BankAccount from '../../page/BankAccount';
+import BankAccount from '../BankAccount';
 
 const Dashboard = () => {
 	return (

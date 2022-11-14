@@ -1,11 +1,13 @@
 import { AccountGrid, DropDown, SearchInput } from '../components';
 import { getAccountList } from '../api/bankAccount';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const BankAccount = () => {
+	const [accountList, setAccountList] = useState([]);
+
 	useEffect(() => {
 		getAccountList().then((res) => {
-			console.log(res);
+			setAccountList(res);
 		});
 	}, []);
 
@@ -19,7 +21,7 @@ const BankAccount = () => {
 				</div>
 				<SearchInput />
 			</div>
-			<AccountGrid />
+			<AccountGrid accountList={accountList} />
 		</main>
 	);
 };

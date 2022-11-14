@@ -1609,6 +1609,11 @@
       "email": "seungin12@gmail.com",
       "password": "$2a$10$j8jzKgN3JBp8gCvxKSvqvurEMLMykvwicCAQCS8DfQIjHUWPIM/zO",
       "id": 102
+    },
+    {
+      "email": "seung@gmail.com",
+      "password": "$2a$10$/88W7Icw3WNQBe7yIV.D7O2/IsaaEhArSBEYjJHskPkAFqe9buQ.6",
+      "id": 103
     }
   ],
   "userSetting": [
