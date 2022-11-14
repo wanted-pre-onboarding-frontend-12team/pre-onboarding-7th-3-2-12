@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Sidebar, Header, Footer } from '../../components';
 import BankAccount from '../BankAccount';
 
@@ -13,6 +14,13 @@ const Dashboard = () => {
 				<Footer />
 			</div>
 		</div>
+=======
+import { Layout } from '@src/components';
+
+const Dashboard = () => {
+	return (
+		<Layout></Layout>
+>>>>>>> develop
 	);
 };
 
