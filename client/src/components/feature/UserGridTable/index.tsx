@@ -8,13 +8,12 @@ import { nameMasker, phoneNumberMasker, dateISOStringToFullDay, genderCodeToGend
 type Props = {
   tableHeadTrs: string[],
   tableBodyList: UserResponseDTO[] | undefined,
-  gridCols: string;
 }
 
 const UserGridTable = (props: Props) => {
 	return (
 		<ul
-			className={`grid grid-cols-${props.gridCols}`}
+			className={`grid grid-cols-[minmax(150px,_1fr)_minmax(120px,_1fr)_minmax(150px,_1fr)_minmax(200px,_1fr)_minmax(150px,_1fr)_minmax(180px,_1fr)_minmax(150px,_1fr)_minmax(150px,_1fr)_minmax(120px,_1fr)_minmax(150px,_1fr)_minmax(120px,_1fr)]`}
 		>
 			{isValidArray(props.tableHeadTrs) &&
 				props.tableHeadTrs?.map((tableHeadTr, index) => {
