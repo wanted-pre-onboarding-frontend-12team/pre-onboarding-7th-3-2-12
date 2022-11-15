@@ -12,3 +12,4 @@ export { default as UserGridTable } from '@src/components/feature/UserGridTable'
 export { default as DropDown } from '@src/components/shared/DropDown';
 export { default as SearchInput } from '@src/components/shared/SearchInput';
 export { default as Button } from '@src/components/shared/Button';
+export { default as Pagenation } from '@src/components/shared/Pagenation';
