@@ -7,7 +7,7 @@ const Layout = (props: PropsWithChildren) => {
 			<Sidebar />
 			<div className="flex-1 flex-col">
 				<Header />
-				<div className="mt-20 h-[calc(100vh_-_160px)] bg-gray-100">
+				<div className="mt-20 p-8 h-[calc(100vh_-_160px)] bg-gray-100">
 					{props.children}
 				</div>
 				<Footer />
