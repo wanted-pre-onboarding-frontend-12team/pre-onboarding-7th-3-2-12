@@ -1,3 +1,5 @@
+import { getLocalStorage } from './../utils/storage';
+import { ACCESS_TOKEN_KEY } from './../core/apis/common';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const createAxiosInstance = () => {
@@ -11,7 +13,7 @@ const createAxiosInstance = () => {
 const axiosInstance = createAxiosInstance();
 
 export async function requester<Payload>(option: AxiosRequestConfig) {
-	const ACCESS_TOKEN = localStorage.getItem('accessToken');
+	const ACCESS_TOKEN = getLocalStorage(ACCESS_TOKEN_KEY);
 
 	const response: AxiosResponse<Payload> = await axiosInstance(
 		ACCESS_TOKEN

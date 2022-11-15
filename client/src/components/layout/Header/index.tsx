@@ -1,4 +1,5 @@
-import { useLocation } from "react-router-dom";
+import { getLocalStorage } from '@src/utils/storage';
+import { useLocation } from 'react-router-dom';
 
 const pathToPageDescription: { [path: string]: string } = {
 	'/accounts': '계좌 목록',
@@ -7,7 +8,7 @@ const pathToPageDescription: { [path: string]: string } = {
 
 const Header = () => {
 	const locator = useLocation();
-	const userName = localStorage.getItem('USER_NAME');
+	const userName = getLocalStorage('USER_NAME');
 
 	return (
 		<div className="flex items-center justify-between w-full h-20 px-8">
