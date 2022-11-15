@@ -66,7 +66,11 @@ const UserGridTable = (props: Props) => {
 								{last_login && dateISOStringToFullDay(last_login)}
 							</li>
 							<li className="flex items-center justify-center px-4 py-2 text-center bg-white border border-gray-300 border-solid ">
-								<Button type="button" onClick={() => console.log('삭제')} className="px-6 py-1 text-white bg-red-600 rounded-md opacity-80 hover:opacity-100">
+								<Button
+									type="button"
+									onClick={() => console.log('삭제')}
+									className="px-6 py-1 text-white bg-red-600 rounded-md opacity-80 hover:opacity-100"
+								>
 									삭제
 								</Button>
 							</li>

@@ -1601,10 +1601,10 @@
       "updated_at": "2020-08-03T18:53:20.063Z"
     },
     {
-      "id": 101,
-      "email": "admin@email.com",
-      "password": "$2a$10$dsYrGBQbzlQPP4lmmSkez.RkUp7O5qd.yuhpOhzp8l82vuf9IzUhy",
-      "name": "관리자"
+      "email": "admin12@email.com",
+      "password": "$2a$10$CF/lVZya5oD7Eh3Roq6AIOoSRoxSzuNhnH2wcVtDIr5qx1kvgCEQ2",
+      "name": "관리자12",
+      "id": 101
     }
   ],
   "userSetting": [

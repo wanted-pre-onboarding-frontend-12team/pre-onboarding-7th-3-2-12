@@ -38,7 +38,7 @@ const Users = () => {
 			<UserGridTable
 				tableHeadTrs={tableHeadTrs}
 				tableBodyList={currentUsers}
-				gridCols="[minmax(150px,_1fr)_minmax(120px,_1fr)_minmax(150px,_1fr)_minmax(200px,_1fr)_minmax(150px,_1fr)_minmax(180px,_1fr)_minmax(150px,_1fr)_minmax(150px,_1fr)_minmax(150px,_1fr)_minmax(120px,_1fr)_minmax(120px,_1fr)]"
+				gridCols="[minmax(150px,_1fr)_minmax(120px,_1fr)_minmax(150px,_1fr)_minmax(200px,_1fr)_minmax(150px,_1fr)_minmax(180px,_1fr)_minmax(150px,_1fr)_minmax(150px,_1fr)_minmax(120px,_1fr)_minmax(150px,_1fr)_minmax(120px,_1fr)]"
 			/>
 			<Pagenation currentPage={currentPage} totalPage={totalPage ?? DEFALUT_PAGE} onPagenationChange={handlePagenationChange} />
 		</Layout>
