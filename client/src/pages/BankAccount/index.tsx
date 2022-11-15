@@ -1,4 +1,4 @@
-import { AccountGrid, DropDown, SearchInput } from '../../components';
+import { AccountGrid, DropDown, Layout, SearchInput } from '@src/components';
 import { getAccountList } from '../../apis/bankAccount';
 import { useEffect, useState } from 'react';
 
@@ -12,17 +12,19 @@ const BankAccount = () => {
 	}, []);
 
 	return (
-		<main className="p-8">
-			<div className="flex justify-between ">
-				<div>
-					<DropDown list={BROKER} />
-					<DropDown list={ACTIVATION} />
-					<DropDown list={STATUS} />
+		<Layout>
+			<main className="p-8">
+				<div className="flex justify-between ">
+					<div>
+						<DropDown list={BROKER} />
+						<DropDown list={ACTIVATION} />
+						<DropDown list={STATUS} />
+					</div>
+					<SearchInput />
 				</div>
-				<SearchInput />
-			</div>
-			<AccountGrid accountList={accountList} />
-		</main>
+				<AccountGrid accountList={accountList} />
+			</main>
+		</Layout>
 	);
 };
 
