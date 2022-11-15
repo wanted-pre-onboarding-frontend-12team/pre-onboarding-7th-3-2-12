@@ -14,3 +14,16 @@ export const getUsers = async () => {
 
 	return payload;
 };
+
+export const getUsersByPagenation = async (page: number = 1, limit: number = 20) => {
+	const {
+		user: { users },
+	} = API_PATH;
+
+	const { headers, status, payload } = await requester<UserResponseDTO[]>({
+		method: httpMehthod.GET,
+		url: `${users}?_page=${page}&_limit=${limit}`,
+	});
+
+	return payload;
+};
