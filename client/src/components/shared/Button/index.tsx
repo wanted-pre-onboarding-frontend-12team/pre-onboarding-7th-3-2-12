@@ -1,12 +1,8 @@
 import { ButtonHTMLAttributes } from "react"
 
-type Props = {
-  tclass: string;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
-
-const Button = (props: Props) => {
+const Button = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
-		<button className={props.tclass} {...props}>
+		<button {...props}>
 			{props.children}
 		</button>
 	);
