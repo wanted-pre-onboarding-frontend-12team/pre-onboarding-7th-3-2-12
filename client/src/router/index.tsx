@@ -1,12 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
-import { Login, DashBoard, Users } from '../pages';
+import { Login, DashBoard, Users, BankAccount } from '../pages';
 import ROUTE_PATHS from './routePath';
 import { isValidArray } from '../utils/isValidArray';
 
 const routes = [
 	{ id: 1, path: ROUTE_PATHS.DASHBOARD, element: <DashBoard /> },
 	{ id: 2, path: ROUTE_PATHS.LOGIN, element: <Login /> },
-	{ id: 3, path: ROUTE_PATHS.USERS, element: <Users /> }
+	{ id: 3, path: ROUTE_PATHS.USERS, element: <Users /> },
+	{ id: 4, path: ROUTE_PATHS.ACCOUNTS, element: <BankAccount />}
 ];
 
 const Router = () => {
