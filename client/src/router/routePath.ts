@@ -1,9 +1,10 @@
-const ROUTE_PATHS = {
+export const ROUTE_PATH = {
 	DASHBOARD: '/',
-	LOGIN: '/login',
 	USERS: '/users',
 	ACCOUNTS: '/accounts',
 	NOT_FOUND: '*',
 } as const;
 
-export default ROUTE_PATHS;
+export const PRIVATE_PATH = {
+	LOGIN: '/login',
+};

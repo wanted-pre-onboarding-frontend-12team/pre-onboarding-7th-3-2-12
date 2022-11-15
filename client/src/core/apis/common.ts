@@ -11,6 +11,7 @@ export const httpStatusCode = {
 } as const;
 
 export const ACCESS_TOKEN_KEY = 'ACCESS_TOKEN_KEY';
+export const USER_NAME = 'USER_NAME';
 
 export const API_PATH = {
 	auth: {
