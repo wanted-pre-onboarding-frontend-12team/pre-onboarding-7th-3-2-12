@@ -1,28 +1,57 @@
-import { Link } from 'react-router-dom';
-import { Logo, AccountIcon, UserIcon, DashboardIcon, LogoutIcon  } from '@src/assets/icons';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
+import { Logo } from '@src/assets/icons';
+import { sider } from '@src/utils/sidebarList';
+import { removeLocalStorageItem } from '@src/utils/storage';
+import { ACCESS_TOKEN_KEY } from '@src/core/apis/common';
 
 const Sidebar = () => {
+	const [bgColor, setBgColor] = useState('');
+	const location = useLocation();
+	useEffect(() => {
+		const filteredName = sider.filter((prev) => prev.keyword === location.pathname)[0].name;
+		setBgColor(filteredName);
+	}, [location]);
+
+	const handleLogoutClick = () => {
+		const confirm = window.confirm('로그아웃 하시겠습니까?');
+		if (confirm) {
+			removeLocalStorageItem(ACCESS_TOKEN_KEY);
+			window.location.reload;
+		}
+	};
+
 	return (
-		<div className="flex flex-col w-72 h-screen bg-[#041527]">
-			<header className="flex justify-center items-center">
-				<img src={Logo} className="h-20 bg-[#041527]" />
+		<div className="w-60 h-screen bg-[#041527]">
+			<header className="flex items-center justify-center h-20">
+				<img src={Logo} className="h-14 bg-[#041527]" />
 			</header>
-      <Link to="/" className="flex items-center text-1xl text-white font-medium px-9 pt-10 pb-5">
-				<img src={DashboardIcon} className="w-6" />
-			  <p className="text-2xl font-light pl-5">대시보드</p>
-			</Link>
-			<Link to="/accounts" className="flex items-center text-1xl text-white font-medium px-9 pt-10 pb-5">
-				<img src={AccountIcon} className="w-6" />
-				<p className="text-2xl font-light pl-5">계좌 목록</p>
-			</Link>
-			<Link to="/users" className="flex items-center text-1xl text-white font-medium px-9 pt-10 pb-5">
-				<img src={UserIcon} className="w-6" />
-				<p className="text-2xl font-light pl-5">사용자</p>
-			</Link>
-      <button type="button" className="flex items-center text-1xl text-white font-medium px-9 pt-10 pb-5">
-				<img src={LogoutIcon} className="w-6" />
-				<p className="text-2xl font-light pl-5">로그아웃</p>
-			</button>
+			{sider &&
+				sider.map((el) =>
+					el.id < 10 ? (
+						<Link
+							to={`${el.keyword}`}
+							key={el.id}
+							className={`flex items-center text-1xl text-white  ${
+								bgColor === el.name && `bg-[#4690F7]`
+							} font-medium px-9 py-6 pb-5`}
+						>
+							<img src={el.src} className="w-6" />
+							<p className="text-2xl font-light pl-5">{el.name}</p>
+						</Link>
+					) : (
+						<button
+							type="button"
+							key={el.id}
+							className="flex items-center text-1xl text-white font-medium px-9 py-5 pb-5"
+							onClick={handleLogoutClick}
+						>
+							<img src={el.src} className="w-6" />
+							<p className="text-2xl font-light pl-5">{el.name}</p>
+						</button>
+					),
+				)}
 		</div>
 	);
 };
