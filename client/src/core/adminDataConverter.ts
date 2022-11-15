@@ -12,7 +12,7 @@ export const nameMasker = (name: string) => {
 		return `${name[0]}${name
 			.split('')
 			.slice(1, name.length - 1)
-			.map(() => '*')
+			.map(() => MASK)
 			.join('')}${name[name.length - 1]}`;
 	}
 };
@@ -22,7 +22,7 @@ export const phoneNumberMasker = (phoneNumber: string) => {
 
 	return `${startNumbers}-${midNumbers
 		.split('')
-		.map(() => '*')
+		.map(() => MASK)
 		.join('')}-${endNumbers}`;
 };
 
