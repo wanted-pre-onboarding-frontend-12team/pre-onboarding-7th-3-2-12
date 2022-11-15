@@ -5,9 +5,9 @@ import { ROUTE_PATH, PRIVATE_PATH } from '@src/router/routePath';
 import { isValidArray } from '@src/utils/isValidArray';
 
 const routes = [
-	{ id: 1, path: ROUTE_PATHS.DASHBOARD, element: <DashBoard /> },
-  { id: 2, path: ROUTE_PATHS.ACCOUNTS, element: <BankAccount />},
-	{ id: 3, path: ROUTE_PATHS.USERS, element: <Users /> },
+	{ id: 1, path: ROUTE_PATH.DASHBOARD, element: <DashBoard /> },
+	{ id: 2, path: ROUTE_PATH.ACCOUNTS, element: <BankAccount /> },
+	{ id: 3, path: ROUTE_PATH.USERS, element: <Users /> },
 ];
 
 const Router = () => {
