@@ -3,6 +3,7 @@ const ROUTE_PATHS = {
 	LOGIN: '/login',
 	USERS: '/users',
 	ACCOUNTS: '/accounts',
+	ACCOUNTDETAIl: '/accounts/:id',
 	NOT_FOUND: '*',
 } as const;
 
