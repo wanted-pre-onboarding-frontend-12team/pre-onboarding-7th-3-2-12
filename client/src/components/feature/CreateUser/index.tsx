@@ -1,7 +1,10 @@
-import React, { Dispatch, FormEvent, SetStateAction, useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
-import { onAddSetting, onAddUser } from '../../apis/user';
-import { makeUUID } from '../../utils/makeUUID';
+import { useNavigate } from 'react-router-dom';
+import { onAddSetting, onAddUser } from '../../../apis/user';
+import { SignInResponseDTO } from '../../../types/api';
+import { makeUUID } from '../../../utils/makeUUID';
+import useUserStore from '../../../utils/useUserStore';
 import UserInput from './UserInput';
 import UserRadio from './UserRadio';
 import UserSelect from './UserSelect';
@@ -9,33 +12,50 @@ import UserSelect from './UserSelect';
 const CreateUser = () => {
 	const [userInfo, setUserInfo] = useState({});
 	const [userSetting, setUserSetting] = useState({});
-	const [file, setFile] = useState();
+	const [file, setFile] = useState<MediaSource | Blob>();
+	const [uuid, SetUuid] = useState('');
 	const open = useDaumPostcodePopup();
 	const addressRef = useRef<HTMLInputElement>(null);
+	const navigate = useNavigate();
+	const store = useUserStore((state) => state);
 
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const UUID = makeUUID();
-		setUserInfo({ ...userInfo, password: '12345' });
-		setUserInfo({ ...userInfo, uuid: UUID });
-		const response = await onAddUser(userInfo);
-
-		setUserSetting({ ...userSetting, uuid: UUID });
-		const settingResponse = await onAddSetting(userSetting);
+		const SAVE_MESSAGE = '저장하시겠습니까?';
+		if (window.confirm(SAVE_MESSAGE)) {
+			const response = await onAddUser(userInfo);
+			const settingResponse = await onAddSetting(userSetting);
+			if (response) {
+				store.setUser(response.user);
+			}
+			if (settingResponse) {
+				console.log(settingResponse);
+				store.setUserSetting(settingResponse);
+				console.log('store user..  ');
+				console.log(store.user);
+				console.log(store.userSetting);
+				navigate(`/uuid`);
+			}
+		}
 	};
 
-	const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-		const { name, value, type } = e.target;
-		// if (name === 'photo') {
-		// 	console.log(files);
-		// 	setFile(files && files[0]);
-		// 	return;
-		// }
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value, type, files } = e.currentTarget;
+
+		if (type === 'file' && files) {
+			setFile(files[0]);
+			return;
+		}
 
 		if (type === 'radio') {
 			setUserSetting({ ...userSetting, [name]: value });
 			return;
 		}
+		setUserInfo({ ...userInfo, [name]: value });
+	};
+
+	const onSelctChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const { name, value } = e.currentTarget;
 		setUserInfo({ ...userInfo, [name]: value });
 	};
 
@@ -67,19 +87,28 @@ const CreateUser = () => {
 		}
 	};
 
+	useEffect(() => {
+		SetUuid(makeUUID());
+	}, []);
+
+	useEffect(() => {
+		setUserInfo({ ...userInfo, password: '12345', uuid: uuid });
+		setUserSetting({ ...userSetting, uuid: uuid });
+	}, [uuid]);
+
 	return (
 		<section className="p-[16px]">
-			<h1 className="text-xl">신규 사용자 정보</h1>
+			<h1 className="text-xl">신규 사용자 정보 등록</h1>
 			<form onSubmit={onSubmit}>
 				<section className="grid gap-2">
 					<UserInput name="photo" id="photo" type="file" accept="image/*" onChange={onChange}>
 						사용자 프로필
 					</UserInput>
-					{file && <img className="w-48" src={URL.createObjectURL(file)} alt="local image" />}
+					<div>{file && <img className="w-48" src={URL.createObjectURL(file)} alt="local image" />}</div>
 					<UserInput name="name" id="name" onChange={onChange}>
 						이름
 					</UserInput>
-					<UserSelect label="성별" id="gender" name="gender_origin" onChange={onChange}>
+					<UserSelect label="성별" id="gender" name="gender_origin" onChange={onSelctChange}>
 						<option value="1">남성(1)</option>
 						<option value="2">여성(2)</option>
 						<option value="3">남성(3)</option>
