@@ -4,13 +4,15 @@ import PrivateRoute from '@src/router/privateRouter';
 import { ROUTE_PATH, PRIVATE_PATH } from '@src/router/routePath';
 import { isValidArray } from '@src/utils/isValidArray';
 import DetailUser from '@src/components/feature/DetailUser';
+import CreateUser from '@src/components/feature/CreateUser';
 
 const routes = [
 	{ id: 1, path: ROUTE_PATH.DASHBOARD, element: <DashBoard /> },
 	{ id: 2, path: ROUTE_PATH.ACCOUNTS, element: <Account /> },
 	{ id: 3, path: ROUTE_PATH.USERS, element: <Users /> },
-	{ id: 4, path: ROUTE_PATH.DETAILUSER, element: <DetailUser /> },
+	{ id: 4, path: ROUTE_PATH.DETAIL_USER, element: <DetailUser /> },
 	{ id: 5, path: ROUTE_PATH.ACCOUNTDETAIl, element: <AccountDetail /> },
+	{ id: 6, path: ROUTE_PATH.CREATE_USER, element: <CreateUser /> },
 ];
 
 const Router = () => {
