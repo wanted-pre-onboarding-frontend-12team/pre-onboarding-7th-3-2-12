@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@src/components';
-import { UserResponseDTO } from "@src/types/api";
-import { isValidArray } from "@src/utils/isValidArray";
+import { UserResponseDTO } from '@src/types/api';
+import { isValidArray } from '@src/utils/isValidArray';
 import { nameMasker, phoneNumberMasker, dateISOStringToFullDay, genderCodeToGender } from '@src/core/adminDataConverter';
 
 type Props = {
-  tableHeadTrs: string[],
-  tableBodyList: UserResponseDTO[] | undefined,
-}
+	tableHeadTrs: string[];
+	tableBodyList: UserResponseDTO[] | undefined;
+};
 
 const UserGridTable = (props: Props) => {
 	return (
@@ -28,12 +28,12 @@ const UserGridTable = (props: Props) => {
 				})}
 			{isValidArray(props.tableBodyList) &&
 				props.tableBodyList?.map((tableBodyItem) => {
-					const { id, name, gender_origin, birth_date, email, phone_number, created_at, last_login } = tableBodyItem;
+					const { id, uuid, name, gender_origin, birth_date, email, phone_number, created_at, last_login } = tableBodyItem;
 
 					return (
-						<React.Fragment key={id}>
+						<React.Fragment key={uuid}>
 							<li className="flex items-center justify-center px-4 py-2 text-center bg-white border border-gray-300 border-solid">
-								<Link to={`/users/${id}`} className="border-b-2 border-black hover:text-blue-500 hover:border-blue-500">
+								<Link to={`/users/${uuid}`} className="border-b-2 border-black hover:text-blue-500 hover:border-blue-500">
 									{name && nameMasker(name)}
 								</Link>
 							</li>
