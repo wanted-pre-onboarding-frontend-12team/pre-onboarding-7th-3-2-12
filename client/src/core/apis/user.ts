@@ -41,8 +41,10 @@ export const getOneUser = async (uuid: string) => {
 			},
 		});
 		return response.payload;
-	} catch (err: any) {
-		throw new Error(err);
+	} catch (error) {
+		if (error instanceof Error) {
+			throw new Error(error.message);
+		}
 	}
 };
 
@@ -59,7 +61,9 @@ export const getOneUserSetting = async (uuid: string) => {
 			},
 		});
 		return response.payload;
-	} catch (err: any) {
-		throw new Error(err);
+	} catch (error) {
+		if (error instanceof Error) {
+			throw new Error(error.message);
+		}
 	}
 };
