@@ -3,11 +3,13 @@ import { Login, DashBoard, Users, BankAccount } from '@src/pages';
 import PrivateRoute from '@src/router/privateRouter';
 import { ROUTE_PATH, PRIVATE_PATH } from '@src/router/routePath';
 import { isValidArray } from '@src/utils/isValidArray';
+import DetailUser from '@src/components/feature/DetailUser';
 
 const routes = [
 	{ id: 1, path: ROUTE_PATH.DASHBOARD, element: <DashBoard /> },
 	{ id: 2, path: ROUTE_PATH.ACCOUNTS, element: <BankAccount /> },
 	{ id: 3, path: ROUTE_PATH.USERS, element: <Users /> },
+	{ id: 4, path: ROUTE_PATH.DETAILUSER, element: <DetailUser /> },
 ];
 
 const Router = () => {
