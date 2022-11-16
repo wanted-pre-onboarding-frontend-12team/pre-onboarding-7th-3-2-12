@@ -10,7 +10,8 @@ const Sidebar = () => {
 	const [bgColor, setBgColor] = useState('');
 	const location = useLocation();
 	useEffect(() => {
-		const filteredName = sider.filter((prev) => prev.keyword === location.pathname)[0].name;
+		const splitedPathname = location.pathname.split('/')[1];
+		const filteredName = sider.filter((prev) => prev.keyword === splitedPathname)[0].name;
 		setBgColor(filteredName);
 	}, [location]);
 
@@ -31,7 +32,7 @@ const Sidebar = () => {
 				sider.map((el) =>
 					el.id < 10 ? (
 						<Link
-							to={`${el.keyword}`}
+							to={`/${el.keyword}`}
 							key={el.id}
 							className={`flex items-center text-1xl text-white  ${
 								bgColor === el.name && `bg-[#4690F7]`
