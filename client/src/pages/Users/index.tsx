@@ -1,9 +1,9 @@
-import { DropDown, Layout, Pagenation, SearchInput, UserGridTable } from "@src/components"
+import { DropDown, Layout, Pagenation, SearchInput, UserGridTable } from '@src/components';
 import { getUsers, getUsersByPagenation } from '@src/core/apis/user';
-import { UserResponseDTO } from "@src/types/api";
-import { useQuery } from "@tanstack/react-query"
-import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { UserResponseDTO } from '@src/types/api';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const tableHeadTrs = [
 	'고객명',
@@ -28,7 +28,6 @@ const isStaffOptions = [
 		value: 'false',
 		renderText: '임직원 X',
 	},
-
 ];
 
 const isActiveOptions = [
@@ -47,22 +46,22 @@ const DEFALUT_PAGE = 1;
 
 const Users = () => {
 	const [currentPage, setCurrentPage] = useState(DEFALUT_PAGE);
-	const [searchKeyword, setSearchKeyword] = useState("");
+	const [searchKeyword, setSearchKeyword] = useState('');
 	const { data: users } = useQuery<UserResponseDTO[]>(['getUsers', searchKeyword], async () => getUsers(searchKeyword || null));
-  const { data: currentUsers } = useQuery<UserResponseDTO[]>(['getUsersByPagenation', currentPage], async () =>
+	const { data: currentUsers } = useQuery<UserResponseDTO[]>(['getUsersByPagenation', currentPage], async () =>
 		getUsersByPagenation(currentPage, PAGE_OFFSET),
 	);
-	const totalPage = useMemo(() => users && Math.ceil(users.length / PAGE_OFFSET), [users]); 
+	const totalPage = useMemo(() => users && Math.ceil(users.length / PAGE_OFFSET), [users]);
 
 	const handlePagenationChange = (newPage: number) => {
 		setCurrentPage(newPage);
-	}
+	};
 
 	const handleSearchByKeyword = (keyword: string) => {
 		setSearchKeyword(keyword);
-	}
-	
-  return (
+	};
+
+	return (
 		<Layout>
 			<div className="flex justify-between h-10 mb-4">
 				<div className="flex items-center">
@@ -80,13 +79,10 @@ const Users = () => {
 				</div>
 			</div>
 
-			<UserGridTable
-				tableHeadTrs={tableHeadTrs}
-				tableBodyList={searchKeyword ? users : currentUsers}
-			/>
+			<UserGridTable tableHeadTrs={tableHeadTrs} tableBodyList={searchKeyword ? users : currentUsers} />
 			<Pagenation currentPage={currentPage} totalPage={totalPage ?? DEFALUT_PAGE} onPagenationChange={handlePagenationChange} />
 		</Layout>
 	);
-}
+};
 
-export default Users
+export default Users;

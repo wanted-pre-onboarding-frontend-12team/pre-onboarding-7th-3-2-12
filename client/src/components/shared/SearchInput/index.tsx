@@ -5,12 +5,12 @@ type Props = {
 };
 
 const SearchInput = (props: Props) => {
-	const searchInputRef = useRef() as React.MutableRefObject<HTMLInputElement>
+	const searchInputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
 	const handleSearchFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		props.onSearchByKeyword(searchInputRef?.current?.value);
-	}
+	};
 
 	return (
 		<form className="flex items-center" onSubmit={handleSearchFormSubmit}>

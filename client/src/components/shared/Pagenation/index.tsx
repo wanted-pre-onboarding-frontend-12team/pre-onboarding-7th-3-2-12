@@ -1,5 +1,5 @@
-import { Button } from "@src/components";
-import { useCallback } from "react";
+import { Button } from '@src/components';
+import { useCallback } from 'react';
 
 type Props = {
 	currentPage: number;
@@ -10,16 +10,27 @@ type Props = {
 const INITAL_PAGE = 1;
 
 const Pagenation = (props: Props) => {
-  const numberArrayGenerator = useCallback((size: number) => Array(size).fill(null).map((_, index) => index + 1), [props.totalPage]);
-  
-  const handlePagenationClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const newPage = event.currentTarget.dataset.page;
-    props.onPagenationChange(Number(newPage));
-  }
+	const numberArrayGenerator = useCallback(
+		(size: number) =>
+			Array(size)
+				.fill(null)
+				.map((_, index) => index + 1),
+		[props.totalPage],
+	);
 
-  return (
+	const handlePagenationClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+		const newPage = event.currentTarget.dataset.page;
+		props.onPagenationChange(Number(newPage));
+	};
+
+	return (
 		<div className="flex items-center justify-center w-full pt-8">
-			<Button type="button" data-page={INITAL_PAGE} className="hover:text-blue-500" onClick={handlePagenationClick}>{`<<`}</Button>
+			<Button
+				type="button"
+				data-page={INITAL_PAGE}
+				className="hover:text-blue-500"
+				onClick={handlePagenationClick}
+			>{`<<`}</Button>
 			<div className="flex items-center mx-4">
 				{numberArrayGenerator(props.totalPage).map((number) => {
 					return (
@@ -43,6 +54,6 @@ const Pagenation = (props: Props) => {
 			>{`>>`}</Button>
 		</div>
 	);
-}
+};
 
-export default Pagenation
+export default Pagenation;

@@ -3,6 +3,7 @@ export const ROUTE_PATH = {
 	USERS: '/users',
 	DETAILUSER: '/users/:uuid',
 	ACCOUNTS: '/accounts',
+	ACCOUNTDETAIl: '/accounts/:id',
 	NOT_FOUND: '*',
 } as const;
 

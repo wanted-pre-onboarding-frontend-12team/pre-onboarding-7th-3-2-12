@@ -1,11 +1,7 @@
-import { ButtonHTMLAttributes } from "react"
+import { ButtonHTMLAttributes } from 'react';
 
 const Button = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
-  return (
-		<button {...props}>
-			{props.children}
-		</button>
-	);
-}
+	return <button {...props}>{props.children}</button>;
+};
 
-export default Button
+export default Button;
