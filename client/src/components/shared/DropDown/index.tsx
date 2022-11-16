@@ -17,9 +17,14 @@ const DropDown = ({ list, type }: any) => {
 
 	return (
 		<select className="w-36 h-10 px-3 mx-2 border-solid border rounded outline-none" onChange={(e) => filterType(e, type)}>
-			{list.map((item: any) => {
-				return <option value={Object.keys(item)}>{Object.values(item)}</option>;
-			})}
+			{list &&
+				list.map((item: any, index: number) => {
+					return (
+						<option key={index} value={Object.keys(item)}>
+							{Object.values(item)}
+						</option>
+					);
+				})}
 		</select>
 	);
 };
