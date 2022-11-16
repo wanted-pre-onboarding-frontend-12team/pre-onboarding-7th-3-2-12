@@ -42,13 +42,52 @@ export type AccountResponseDTO = {
 	id: number;
 	user_id: number;
 	uuid: string;
-	broker_id: string;
-	status: number;
+	broker_id: Broker_id;
+	status: Status;
 	number: string;
-	name: string;
+	name: AccountName;
 	assets: string;
 	payments: string;
 	is_active: boolean;
 	created_at: string;
 	updated_at: string;
 };
+
+export type Status = 9999 | 1 | 2 | 3 | 4;
+
+export type Broker_id =
+	| '209'
+	| '218'
+	| '230'
+	| '238'
+	| '240'
+	| '243'
+	| '247'
+	| '261'
+	| '262'
+	| '263'
+	| '264'
+	| '265'
+	| '266'
+	| '267'
+	| '268'
+	| '269'
+	| '270'
+	| '271'
+	| '279'
+	| '280'
+	| '287'
+	| '288'
+	| '290'
+	| '291'
+	| '292';
+
+export type AccountName =
+	| 'Home Loan Account'
+	| 'Auto Loan Account'
+	| 'Checking Account'
+	| 'Credit Card Account'
+	| 'Personal Loan Account'
+	| 'Investment Account'
+	| 'Savings Account'
+	| 'Money Market Account';
