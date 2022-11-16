@@ -27,3 +27,33 @@ export const getUsersByPagenation = async (page: number = 1, limit: number = 20)
 
 	return payload;
 };
+
+export const getOneUser = async (uuid: string) => {
+	try {
+		const response = await requester({
+			method: 'GET',
+			url: `/users`,
+			params: {
+				uuid: uuid,
+			},
+		});
+		return response.payload;
+	} catch (err: any) {
+		throw new Error(err);
+	}
+};
+
+export const getOneUserSetting = async (uuid: string) => {
+	try {
+		const response = await requester({
+			method: 'GET',
+			url: '/userSetting',
+			params: {
+				uuid: uuid,
+			},
+		});
+		return response.payload;
+	} catch (err: any) {
+		throw new Error(err);
+	}
+};
