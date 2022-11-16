@@ -1,4 +1,4 @@
-import Button from '@src/components/shared/Button';
+import { Button } from '@src/components';
 import { useCallback } from 'react';
 
 type Props = {

@@ -6,16 +6,20 @@ import { dropDownTable } from '@src/constants/dropDown';
 import useAccountStore from '@src/zustand/useAccountStore';
 
 const Account = () => {
-	const [search, setSearch] = useState('');
+	const [searchKeyword, setSearchKeyword] = useState('');
 	const [currentPage, setCurrentPage] = useState(1);
 	const store = useAccountStore((state) => state);
 	const selectedBroker = store.broker;
 	const selectedActive = store.active;
 	const selectedStatus = store.status;
-	const { accounts, totalPage } = useAccount(currentPage, selectedBroker, selectedActive, selectedStatus, search);
+	const { accounts, totalPage } = useAccount(currentPage, selectedBroker, selectedActive, selectedStatus, searchKeyword);
 
 	const handlePagenationChange = (newPage: number) => {
 		setCurrentPage(newPage);
+	};
+
+	const handleSearchByKeyword = (keyword: string) => {
+		setSearchKeyword(keyword);
 	};
 
 	return (
@@ -27,7 +31,7 @@ const Account = () => {
 						<DropDown type="status" list={dropDownTable.SatusDropDown} />
 						<DropDown type="active" list={dropDownTable.ActiveDropDown} />
 					</div>
-					<SearchInput setSearch={setSearch} />
+					<SearchInput onSearchByKeyword={handleSearchByKeyword} />
 				</div>
 				<AccountGrid accountList={accounts} />
 				<Pagenation totalPage={totalPage!} currentPage={currentPage} onPagenationChange={handlePagenationChange} />

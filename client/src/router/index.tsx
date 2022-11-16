@@ -1,22 +1,28 @@
 import { Routes, Route } from 'react-router-dom';
-import { Login, DashBoard, Users } from '@src/pages';
-import ROUTE_PATHS from './routePath';
+import { Login, DashBoard, Users, Account, AccountDetail } from '@src/pages';
+import PrivateRoute from '@src/router/privateRouter';
+import { ROUTE_PATH, PRIVATE_PATH } from '@src/router/routePath';
 import { isValidArray } from '@src/utils/isValidArray';
-import Account from '@src/pages/Account';
-import AccountDetail from '@src/pages/AccountDetail';
+import DetailUser from '@src/components/feature/DetailUser';
 
 const routes = [
-	{ id: 1, path: ROUTE_PATHS.DASHBOARD, element: <DashBoard /> },
-	{ id: 2, path: ROUTE_PATHS.LOGIN, element: <Login /> },
-	{ id: 3, path: ROUTE_PATHS.USERS, element: <Users /> },
-	{ id: 4, path: ROUTE_PATHS.ACCOUNTS, element: <Account /> },
-	{ id: 5, path: ROUTE_PATHS.ACCOUNTDETAIl, element: <AccountDetail /> },
+	{ id: 1, path: ROUTE_PATH.DASHBOARD, element: <DashBoard /> },
+	{ id: 2, path: ROUTE_PATH.ACCOUNTS, element: <Account /> },
+	{ id: 3, path: ROUTE_PATH.USERS, element: <Users /> },
+	{ id: 4, path: ROUTE_PATH.DETAILUSER, element: <DetailUser /> },
+	{ id: 5, path: ROUTE_PATH.ACCOUNTDETAIl, element: <AccountDetail /> },
 ];
 
 const Router = () => {
 	return (
 		<Routes>
-			{isValidArray(routes) && routes.map(({ id, path, element }) => <Route key={id} path={path} element={element} />)}
+			<Route element={<PrivateRoute authentication={false} />}>
+				<Route path={PRIVATE_PATH.LOGIN} element={<Login />} />
+			</Route>
+
+			<Route element={<PrivateRoute authentication={true} />}>
+				{isValidArray(routes) && routes.map(({ id, path, element }) => <Route key={id} path={path} element={element} />)}
+			</Route>
 		</Routes>
 	);
 };

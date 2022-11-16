@@ -8,7 +8,7 @@ import { maskingAccount } from '@src/utils/accountUtils';
 
 const AccountGrid = ({ accountList }: { accountList: AccountResponseDTO[] | undefined }) => {
 	return (
-		<article className="overflow-x-auto mt-12">
+		<article className="mt-12 overflow-x-auto">
 			<ul className="grid grid-cols-[minmax(90px,_1fr)_minmax(100px,_1fr)_minmax(150px,_1.5fr)_minmax(100px,_1fr)_minmax(150px,_1fr)_1.5fr_1.5fr_minmax(140px,_1fr)_minmax(120px,_1fr)]">
 				{ACCOUNT_LIST.map((item: string) => {
 					return <li className="py-2 px-5 border border-solid border-gray-300 bg-[#FAFAFA] text-center">{item}</li>;
