@@ -27,3 +27,43 @@ export const getUsersByPagenation = async (page: number = 1, limit: number = 20)
 
 	return payload;
 };
+
+export const getOneUser = async (uuid: string) => {
+	const {
+		user: { users },
+	} = API_PATH;
+	try {
+		const response = await requester({
+			method: httpMehthod.GET,
+			url: users,
+			params: {
+				uuid: uuid,
+			},
+		});
+		return response.payload;
+	} catch (error) {
+		if (error instanceof Error) {
+			throw new Error(error.message);
+		}
+	}
+};
+
+export const getOneUserSetting = async (uuid: string) => {
+	const {
+		user: { setting },
+	} = API_PATH;
+	try {
+		const response = await requester({
+			method: httpMehthod.GET,
+			url: setting,
+			params: {
+				uuid: uuid,
+			},
+		});
+		return response.payload;
+	} catch (error) {
+		if (error instanceof Error) {
+			throw new Error(error.message);
+		}
+	}
+};
