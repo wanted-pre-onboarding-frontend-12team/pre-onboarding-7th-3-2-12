@@ -1,30 +1,27 @@
-import useAccountStore from '@src/zustand/useAccountStore';
-import { Zus_Broker_id, Zus_Active, Zus_Status } from '@src/constants/zustand';
+type Props = {
+	dropdownTarget: string;
+	options: Array<{ id: number; value: string; renderText: string }>;
+	onDropdownChange: (value: string, changeTarget: string) => void;
+};
 
-const DropDown = ({ list, type }: any) => {
-	const store = useAccountStore((state) => state);
-
-	const filterType = (e: React.ChangeEvent<HTMLSelectElement>, type: string) => {
-		if (type === 'broker') {
-			store.setBroker(e.currentTarget.value as Zus_Broker_id);
-		} else if (type === 'status') {
-			store.setStatus(e.currentTarget.value as Zus_Status);
-		} else if (type === 'active') {
-			store.setActive(e.currentTarget.value as Zus_Active);
-		}
-		//TODO: 여기다가 currentPage 1로 초기화 하는 로직을 넣으면 되지 않을까 싶다.
+const DropDown = (props: Props) => {
+	const handleDropdownChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+		props.onDropdownChange(event.currentTarget.value, event.currentTarget.dataset.dropdownTarget!);
 	};
 
 	return (
-		<select className="w-36 h-10 px-3 mx-2 border-solid border rounded outline-none" onChange={(e) => filterType(e, type)}>
-			{list &&
-				list.map((item: any, index: number) => {
-					return (
-						<option key={index} value={Object.keys(item)}>
-							{Object.values(item)}
-						</option>
-					);
-				})}
+		<select
+			data-dropdown-target={props.dropdownTarget}
+			className="w-40 h-10 px-3 mx-2 border-solid border rounded outline-none appearance-none bg-no-repeat bg-[url('https://www.svgrepo.com/show/80156/down-arrow.svg')] bg-[length:10px_10px] bg-[center_right_1rem]"
+			onChange={handleDropdownChange}
+		>
+			{props.options.map((option: { id: number; value: string; renderText: string }) => {
+				return (
+					<option key={option.id} value={option.value}>
+						{option.renderText}
+					</option>
+				);
+			})}
 		</select>
 	);
 };

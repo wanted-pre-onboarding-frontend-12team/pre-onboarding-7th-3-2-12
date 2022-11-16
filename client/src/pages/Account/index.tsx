@@ -27,9 +27,9 @@ const Account = () => {
 			<main className="p-8">
 				<div className="flex justify-between">
 					<div>
-						<DropDown type="broker" list={dropDownTable.BrokerDropDown} />
-						<DropDown type="status" list={dropDownTable.SatusDropDown} />
-						<DropDown type="active" list={dropDownTable.ActiveDropDown} />
+						<DropDown dropdownTarget="broker" options={dropDownTable.BrokerDropDown} onDropdownChange={() => {}} />
+						<DropDown dropdownTarget="status" options={dropDownTable.SatusDropDown} onDropdownChange={() => {}}/>
+						<DropDown dropdownTarget="active" options={dropDownTable.ActiveDropDown} onDropdownChange={() => {}}/>
 					</div>
 					<SearchInput onSearchByKeyword={handleSearchByKeyword} />
 				</div>
