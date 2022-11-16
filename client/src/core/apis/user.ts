@@ -29,10 +29,13 @@ export const getUsersByPagenation = async (page: number = 1, limit: number = 20)
 };
 
 export const getOneUser = async (uuid: string) => {
+	const {
+		user: { users },
+	} = API_PATH;
 	try {
 		const response = await requester({
-			method: 'GET',
-			url: `/users`,
+			method: httpMehthod.GET,
+			url: users,
 			params: {
 				uuid: uuid,
 			},
@@ -44,10 +47,13 @@ export const getOneUser = async (uuid: string) => {
 };
 
 export const getOneUserSetting = async (uuid: string) => {
+	const {
+		user: { setting },
+	} = API_PATH;
 	try {
 		const response = await requester({
-			method: 'GET',
-			url: '/userSetting',
+			method: httpMehthod.GET,
+			url: setting,
 			params: {
 				uuid: uuid,
 			},
