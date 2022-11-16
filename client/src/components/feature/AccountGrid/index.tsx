@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { accountStatusTable } from '@src/constants/account';
 import { AccountResponseDTO } from '@src/types/api';
@@ -11,14 +12,14 @@ const AccountGrid = ({ accountList }: { accountList: AccountResponseDTO[] | unde
 		<article className="mt-12 overflow-x-auto">
 			<ul className="grid grid-cols-[minmax(90px,_1fr)_minmax(100px,_1fr)_minmax(150px,_1.5fr)_minmax(100px,_1fr)_minmax(150px,_1fr)_1.5fr_1.5fr_minmax(140px,_1fr)_minmax(120px,_1fr)]">
 				{ACCOUNT_LIST.map((item: string) => {
-					return <li className="py-2 px-5 border border-solid border-gray-300 bg-[#FAFAFA] text-center">{item}</li>;
+					return <li key={item} className="py-2 px-5 border border-solid border-gray-300 bg-[#FAFAFA] text-center">{item}</li>;
 				})}
 				{accountList?.map((item: AccountResponseDTO) => {
 					const isGain =
 						item.assets > item.payments ? 'text-red-800' : item.assets < item.payments ? 'text-blue-800' : 'text-black';
 
 					return (
-						<>
+						<React.Fragment key={item.id}>
 							<li className={'py-2 px-4 border border-solid border-gray-300 bg-white text-center'}>
 								<Link to={`/accounts/${item.id}`} className="border-b-2 border-black hover:text-blue-500 hover:border-blue-500">
 									{item.user_id}
@@ -46,7 +47,7 @@ const AccountGrid = ({ accountList }: { accountList: AccountResponseDTO[] | unde
 								{item.is_active ? '활성화' : '비활성화'}
 							</li>
 							<li className={'py-2 px-4 border border-solid border-gray-300 bg-white text-center'}>{getDay(item.created_at)}</li>
-						</>
+						</React.Fragment>
 					);
 				})}
 			</ul>

@@ -21,21 +21,35 @@ const tableHeadTrs = [
 
 const isStaffOptions = [
 	{
-		value: 'true',
-		renderText: '임직원 O',
+		id: 1,
+		value: '',
+		renderText: '임직원 계좌 여부',
 	},
 	{
+		id: 2,
+		value: 'true',
+		renderText: '임직원 계좌 O',
+	},
+	{
+		id: 3,
 		value: 'false',
-		renderText: '임직원 X',
+		renderText: '임직원 계좌 X',
 	},
 ];
 
 const isActiveOptions = [
 	{
+		id: 1,
+		value: '',
+		renderText: '활성화 여부',
+	},
+	{
+		id: 2,
 		value: 'true',
 		renderText: '활성화 O',
 	},
 	{
+		id: 3,
 		value: 'false',
 		renderText: '활성화 X',
 	},
@@ -61,6 +75,15 @@ const Users = () => {
 		setSearchKeyword(keyword);
 	};
 
+	const [dropdownObj, setDropdownObj] = useState({
+		userActive: '',
+		userStaff: '',
+	});
+
+	const handleDropdownFilterChange = (value: string, changeTarget: string) => {
+		setDropdownObj({ ...dropdownObj, [changeTarget]: value })
+	};
+
 	return (
 		<Layout>
 			<div className="flex justify-between h-10 mb-4">
@@ -73,8 +96,8 @@ const Users = () => {
 					</Link>
 				</div>
 				<div className="flex items-center">
-					<DropDown options={isActiveOptions} />
-					<DropDown options={isStaffOptions} />
+					<DropDown dropdownTarget="userActive" options={isActiveOptions} onDropdownChange={handleDropdownFilterChange} />
+					<DropDown dropdownTarget="userStaff" options={isStaffOptions} onDropdownChange={handleDropdownFilterChange} />
 					<SearchInput onSearchByKeyword={handleSearchByKeyword} />
 				</div>
 			</div>
