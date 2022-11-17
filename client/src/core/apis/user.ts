@@ -1,6 +1,6 @@
 import { API_PATH, httpMehthod } from '@src/core/apis/common';
 import requester from '@src/core/apis/requester';
-import { UserResponseDTO, UserSettingResponseDTO } from '@src/types/api';
+import { UserObject, UserResponseDTO, UserSettingResponseDTO } from '@src/types/api';
 
 export const getUsers = async (query: string | null) => {
 	const {
@@ -56,13 +56,17 @@ export const getUserSetting = async (uuid: string) => {
 };
 
 type userInfo = {};
+type UserResponse = {
+	accessToken: string;
+	user: UserObject;
+};
 
 export const onAddUser = async ({ ...props }: userInfo) => {
 	const {
 		user: { users },
 	} = API_PATH;
 	const data = { ...props };
-	const { headers, status, payload } = await requester<UserResponseDTO[]>({
+	const { headers, status, payload } = await requester<UserResponse>({
 		method: httpMehthod.POST,
 		url: users,
 		data,
@@ -91,6 +95,19 @@ type Props = {
 };
 
 export const updateUserName = async ({ id, name }: Props) => {
+	const {
+		user: { users },
+	} = API_PATH;
+
+	const { headers, status, payload } = await requester<UserResponseDTO[]>({
+		method: httpMehthod.PATCH,
+		url: `${users}/${id}`,
+		data: { name },
+	});
+	return payload;
+};
+
+export const updateAccountName = async ({ id, name }: Props) => {
 	const {
 		user: { users },
 	} = API_PATH;
