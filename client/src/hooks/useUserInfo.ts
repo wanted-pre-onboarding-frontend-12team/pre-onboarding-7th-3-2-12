@@ -12,4 +12,3 @@ const useUserInfo = (uuid: string) => {
 };
 
 export default useUserInfo;
-Co-authored-by: OD <kg-te@naver.com>
