@@ -1,6 +1,6 @@
 import { API_PATH, httpMehthod } from '@src/core/apis/common';
 import requester from '@src/core/apis/requester';
-import { UserResponseDTO } from '@src/types/api';
+import { UserResponseDTO, UserSettingResponseDTO } from '@src/types/api';
 
 export const getUsers = async (query: string | null) => {
 	const {
@@ -28,42 +28,77 @@ export const getUsersByPagenation = async (page: number = 1, limit: number = 20)
 	return payload;
 };
 
-export const getOneUser = async (uuid: string) => {
+export const getUser = async (uuid: string) => {
 	const {
 		user: { users },
 	} = API_PATH;
-	try {
-		const response = await requester({
-			method: httpMehthod.GET,
-			url: users,
-			params: {
-				uuid: uuid,
-			},
-		});
-		return response.payload;
-	} catch (error) {
-		if (error instanceof Error) {
-			throw new Error(error.message);
-		}
-	}
+
+	const { headers, status, payload } = await requester<UserResponseDTO[]>({
+		method: httpMehthod.GET,
+		url: users,
+		params: { uuid: uuid },
+	});
+
+	return payload;
 };
 
-export const getOneUserSetting = async (uuid: string) => {
+export const getUserSetting = async (uuid: string) => {
 	const {
 		user: { setting },
 	} = API_PATH;
-	try {
-		const response = await requester({
-			method: httpMehthod.GET,
-			url: setting,
-			params: {
-				uuid: uuid,
-			},
-		});
-		return response.payload;
-	} catch (error) {
-		if (error instanceof Error) {
-			throw new Error(error.message);
-		}
-	}
+
+	const { headers, status, payload } = await requester<UserSettingResponseDTO[]>({
+		method: httpMehthod.GET,
+		url: setting,
+		params: { uuid: uuid },
+	});
+	return payload;
+};
+
+type userInfo = {};
+
+export const onAddUser = async ({ ...props }: userInfo) => {
+	const {
+		user: { users },
+	} = API_PATH;
+	const data = { ...props };
+	const { headers, status, payload } = await requester<UserResponseDTO[]>({
+		method: httpMehthod.POST,
+		url: users,
+		data,
+	});
+	return payload;
+};
+
+type userSetting = {};
+
+export const onAddSetting = async ({ ...props }: userSetting) => {
+	const {
+		user: { setting },
+	} = API_PATH;
+	const data = { ...props };
+	const { headers, status, payload } = await requester<UserSettingResponseDTO[]>({
+		method: httpMehthod.POST,
+		url: setting,
+		data,
+	});
+	return payload;
+};
+
+type Props = {
+	id: number;
+	name: string;
+};
+
+export const updateUserName = async ({ id, name }: Props) => {
+	const {
+		user: { users },
+	} = API_PATH;
+
+	const { headers, status, payload } = await requester<UserResponseDTO[]>({
+		method: httpMehthod.PATCH,
+		url: `${users}/${id}`,
+		data: { name },
+	});
+	return payload;
 };

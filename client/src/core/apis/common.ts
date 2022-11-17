@@ -1,6 +1,7 @@
 export const httpMehthod = {
 	GET: 'GET',
 	POST: 'POST',
+	PATCH: 'PATCH',
 } as const;
 
 export const httpStatusCode = {

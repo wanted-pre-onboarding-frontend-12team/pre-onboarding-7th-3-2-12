@@ -1,11 +1,13 @@
+import React, { forwardRef } from 'react';
 import { dateISOStringToFullDay, genderCodeToGender, nameMasker, phoneNumberMasker } from '@src/core/adminDataConverter';
 import { User, UserSetting } from '@src/utils/useUserStore';
 
 type Props = {
 	info: User & UserSetting;
+	editMode: boolean;
 };
 
-const UserInfo = ({ info }: Props) => {
+const UserInfo = ({ info, editMode }: Props, ref: React.Ref<HTMLInputElement>) => {
 	const {
 		uuid,
 		name,
@@ -27,7 +29,11 @@ const UserInfo = ({ info }: Props) => {
 	return (
 		<section className="grid grid-cols-[minmax(150px,_0.5fr)_minmax(300px,_1fr)_minmax(150px,_0.5fr)_minmax(300px,_1fr)] ">
 			<dt className="border border-solid border-gray-300 bg-[#FAFAFA] px-4 py-2 text-center">이름</dt>
-			<dd className="border border-solid border-gray-300 bg-[#FAFAFA] px-4 py-2 text-center">{name && nameMasker(name)}</dd>
+			{editMode ? (
+				<input ref={ref} type="text" defaultValue={name} />
+			) : (
+				<dd className="border border-solid border-gray-300 bg-[#FAFAFA] px-4 py-2 text-center">{name}</dd>
+			)}
 			<dt className="border border-solid border-gray-300 bg-[#FAFAFA] px-4 py-2 text-center">혜택 수신 동의 여부</dt>
 			<dd className="border border-solid border-gray-300 bg-[#FAFAFA] px-4 py-2 text-center">
 				{allow_marketing_push ? '⭕️' : '❌'}
@@ -79,4 +85,4 @@ const UserInfo = ({ info }: Props) => {
 	);
 };
 
-export default UserInfo;
+export default forwardRef(UserInfo);

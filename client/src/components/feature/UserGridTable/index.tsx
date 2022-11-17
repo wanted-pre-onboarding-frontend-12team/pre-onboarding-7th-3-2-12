@@ -33,7 +33,7 @@ const UserGridTable = (props: Props) => {
 					return (
 						<React.Fragment key={uuid}>
 							<li className="flex items-center justify-center px-4 py-2 text-center bg-white border border-gray-300 border-solid">
-								<Link to={`/users/${uuid}`} className="border-b-2 border-black hover:text-blue-500 hover:border-blue-500">
+								<Link to={`/users/${uuid}/${id}`} className="border-b-2 border-black hover:text-blue-500 hover:border-blue-500">
 									{name && nameMasker(name)}
 								</Link>
 							</li>
