@@ -61,3 +61,16 @@ export const getUserAccounts = async (user_id: number) => {
 
 	return payload;
 };
+
+export const updateAccountList = async (id: number, username: string) => {
+	const {
+		user: { accounts },
+	} = API_PATH;
+
+	const { headers, status, payload } = await requester<AccountResponseDTO[]>({
+		method: httpMehthod.PATCH,
+		url: `${accounts}/${id}`,
+		data: { user_name: username },
+	});
+	return payload;
+};
