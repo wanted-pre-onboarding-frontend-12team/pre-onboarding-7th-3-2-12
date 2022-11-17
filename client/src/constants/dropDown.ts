@@ -1,4 +1,4 @@
-const BrokerDropDown = [
+const AccountBrokerIdOptions = [
 	{ id: 1, value: '', renderText: '브로커명' },
 	{ id: 2, value: '209', renderText: '유안타증권' },
 	{ id: 3, value: '218', renderText: '현대증권' },
@@ -27,7 +27,7 @@ const BrokerDropDown = [
 	{ id: 26, value: '271', renderText: '토스증권' },
 ];
 
-const SatusDropDown = [
+const AccountStatusOptions = [
 	{ id: 1, value: '', renderText: '계좌상태' },
 	{ id: 6, value: '9999', renderText: '관리자확인필요' },
 	{ id: 3, value: '1', renderText: '입금대기' },
@@ -36,10 +36,10 @@ const SatusDropDown = [
 	{ id: 7, value: '4', renderText: '해지' },
 ];
 
-const ActiveDropDown = [
+const AccountActiveOptions = [
 	{ id: 1, value: '', renderText: '계좌활성화' },
 	{ id: 2, value: 'true', renderText: '활성화' },
 	{ id: 3, value: 'false', renderText: '비활성화' },
 ];
 
-export const dropDownTable = { BrokerDropDown, SatusDropDown, ActiveDropDown };
+export const dropDownTable = { AccountBrokerIdOptions, AccountStatusOptions, AccountActiveOptions };
