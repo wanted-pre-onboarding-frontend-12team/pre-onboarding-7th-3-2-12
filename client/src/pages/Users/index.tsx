@@ -81,7 +81,7 @@ const Users = () => {
 	});
 
 	const handleDropdownFilterChange = (value: string, changeTarget: string) => {
-		setDropdownObj({ ...dropdownObj, [changeTarget]: value })
+		setDropdownObj({ ...dropdownObj, [changeTarget]: value });
 	};
 
 	return (
@@ -103,7 +103,14 @@ const Users = () => {
 			</div>
 
 			<UserGridTable tableHeadTrs={tableHeadTrs} tableBodyList={searchKeyword ? users : currentUsers} />
-			<Pagenation currentPage={currentPage} totalPage={totalPage ?? DEFALUT_PAGE} onPagenationChange={handlePagenationChange} />
+			<Pagenation
+				searchKeyword={searchKeyword}
+				setCurrentPage={setCurrentPage}
+				filterObj={dropdownObj}
+				currentPage={currentPage}
+				totalPage={totalPage ?? DEFALUT_PAGE}
+				onPagenationChange={handlePagenationChange}
+			/>
 		</Layout>
 	);
 };

@@ -51,7 +51,14 @@ const Account = () => {
 					<SearchInput onSearchByKeyword={handleSearchByKeyword} />
 				</div>
 				<AccountGrid accountList={accounts} />
-				<Pagenation totalPage={totalPage!} currentPage={currentPage} onPagenationChange={handlePagenationChange} />
+				<Pagenation
+					searchKeyword={searchKeyword}
+					setCurrentPage={setCurrentPage}
+					filterObj={accountFilterObj}
+					totalPage={totalPage!}
+					currentPage={currentPage}
+					onPagenationChange={handlePagenationChange}
+				/>
 			</main>
 		</Layout>
 	);
