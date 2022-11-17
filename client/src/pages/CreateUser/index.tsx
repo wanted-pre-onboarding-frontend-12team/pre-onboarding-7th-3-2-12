@@ -9,8 +9,19 @@ import UserRadio from './UserRadio';
 import UserSelect from './UserSelect';
 
 const CreateUser = () => {
-	const [userInfo, setUserInfo] = useState({});
-	const [userSetting, setUserSetting] = useState({});
+	const [userInfo, setUserInfo] = useState({
+		password: '12345',
+		uuid: '',
+		address: '',
+		gender_origin: 1,
+	});
+	const [userSetting, setUserSetting] = useState({
+		allow_marketing_push: false,
+		allow_invest_push: false,
+		is_active: false,
+		is_staff: false,
+		uuid: '',
+	});
 	const [file, setFile] = useState<MediaSource | Blob>();
 	const [uuid, SetUuid] = useState('');
 	const open = useDaumPostcodePopup();
@@ -25,7 +36,7 @@ const CreateUser = () => {
 			const settingResponse = await onAddSetting(userSetting);
 			if (response && settingResponse) {
 				const { uuid, id } = response.user;
-				navigate(`users/${uuid}/${id}`, { replace: true });
+				navigate(`/users/${uuid}/${id}`, { replace: true });
 			}
 		}
 	};
@@ -78,22 +89,15 @@ const CreateUser = () => {
 	}, []);
 
 	useEffect(() => {
-		setUserInfo({ ...userInfo, password: '12345', uuid: uuid });
+		setUserInfo({ ...userInfo, uuid: uuid });
 		setUserSetting({ ...userSetting, uuid: uuid });
 	}, [uuid]);
 
 	return (
 		<Layout>
-			<h1 className="text-2xl pb-8">신규 사용자 정보 등록</h1>
-			<form
-				onSubmit={onSubmit}
-				// className="grid grid-cols-[minmax(150px,_0.5fr)_minmax(300px,_1fr)_minmax(150px,_0.5fr)_minmax(300px,_1fr)] "
-			>
-				<section className="grid gap-2">
-					<UserInput name="photo" id="photo" type="file" accept="image/*" onChange={onChange}>
-						사용자 프로필
-					</UserInput>
-					<div>{file && <img className="w-48" src={URL.createObjectURL(file)} alt="local image" />}</div>
+			<h1 className="text-xl pb-8 font-bold">신규 고객 생성</h1>
+			<form onSubmit={onSubmit}>
+				<section className="grid gap-3">
 					<UserInput name="name" id="name" onChange={onChange}>
 						이름
 					</UserInput>
@@ -106,13 +110,13 @@ const CreateUser = () => {
 					<UserInput name="age" id="age" type="number" onChange={onChange}>
 						나이
 					</UserInput>
-					<UserInput name="birth_date" id="birthDate" type="date" onChange={onChange}>
+					<UserInput name="birth_date" id="birthDate" type="date" onChange={onChange} width="w-[200px]">
 						생년월일
 					</UserInput>
 					<UserInput name="phone_number" id="phoneNumber" type="tel" onChange={onChange}>
 						전화번호
 					</UserInput>
-					<UserInput ref={addressRef} readOnly={true} onClick={onPostClick} id="address" name="address" width="w-[700px]">
+					<UserInput ref={addressRef} readOnly={true} onClick={onPostClick} id="address" name="address" width="w-[500px]">
 						주소
 					</UserInput>
 					<UserInput name="detail_address" id="detailAddress" onChange={onChange} width="w-[500px]">
@@ -122,42 +126,42 @@ const CreateUser = () => {
 						이메일
 					</UserInput>
 				</section>
-				{/* <section className="grid gap-2 pt-3 pb-3"> */}
-				<UserRadio
-					id="allowMarketing"
-					name="allow_marketing_push"
-					trueId="marketingAllow"
-					falseId="marketingNotAllow"
-					onChange={onChange}
-				>
-					마케팅 정보 수신 동의 여부
-				</UserRadio>
-				<UserRadio id="allowInvest" name="allow_invest_push" trueId="investAllow" falseId="investNotAllow" onChange={onChange}>
-					투자 정보 수신 동의 여부
-				</UserRadio>
-				<UserRadio
-					id="isActive"
-					name="is_active"
-					trueLabel="활성화"
-					falseLabel="비활성화"
-					trueId="active"
-					falseId="unActive"
-					onChange={onChange}
-				>
-					활성화 여부
-				</UserRadio>
-				<UserRadio
-					id="isStaff"
-					name="is_staff"
-					trueLabel="임직원"
-					falseLabel="해당 없음"
-					trueId="staff"
-					falseId="notStaff"
-					onChange={onChange}
-				>
-					임직원 여부
-				</UserRadio>
-				{/* </section> */}
+				<section className="grid gap-3 pt-3">
+					<UserRadio
+						id="allowMarketing"
+						name="allow_marketing_push"
+						trueId="marketingAllow"
+						falseId="marketingNotAllow"
+						onChange={onChange}
+					>
+						마케팅 정보 수신 동의 여부
+					</UserRadio>
+					<UserRadio id="allowInvest" name="allow_invest_push" trueId="investAllow" falseId="investNotAllow" onChange={onChange}>
+						투자 정보 수신 동의 여부
+					</UserRadio>
+					<UserRadio
+						id="isActive"
+						name="is_active"
+						trueLabel="활성화"
+						falseLabel="비활성화"
+						trueId="active"
+						falseId="unActive"
+						onChange={onChange}
+					>
+						활성화 여부
+					</UserRadio>
+					<UserRadio
+						id="isStaff"
+						name="is_staff"
+						trueLabel="임직원"
+						falseLabel="해당 없음"
+						trueId="staff"
+						falseId="notStaff"
+						onChange={onChange}
+					>
+						임직원 여부
+					</UserRadio>
+				</section>
 				<section className="flex justify-end px-[16px] pt-4">
 					<button className="h-10 w-12 rounded bg-[#041527] text-white font-bold" type="submit">
 						저장

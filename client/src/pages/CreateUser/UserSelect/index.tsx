@@ -11,10 +11,10 @@ type Props = {
 const UserSelect = ({ onChange, name, id, label, children }: Props) => {
 	return (
 		<div className="flex">
-			<label className="w-[200px]" htmlFor={id}>
+			<label className="w-[150px] flex items-center" htmlFor={id}>
 				{label}
 			</label>
-			<select name={name} id={id} onChange={onChange} className="border-solid border-2 border-slate-400 w-1/3 mb-[6px]">
+			<select name={name} id={id} onChange={onChange} className="border-solid border-2 rounded-md border-slate-400 w-[200px] p-2">
 				{children}
 			</select>
 		</div>
