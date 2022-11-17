@@ -24,7 +24,6 @@ const CreateUser = () => {
 			const response = await onAddUser(userInfo);
 			const settingResponse = await onAddSetting(userSetting);
 			if (response && settingResponse) {
-				console.log(response.user);
 				const { uuid, id } = response.user;
 				navigate(`users/${uuid}/${id}`, { replace: true });
 			}
