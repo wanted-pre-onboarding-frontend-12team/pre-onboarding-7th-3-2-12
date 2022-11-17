@@ -10,7 +10,7 @@ const createAxiosInstance = () => {
 	return base;
 };
 
-const axiosInstance = createAxiosInstance();
+export const axiosInstance = createAxiosInstance();
 
 export default async function requester<Payload>(option: AxiosRequestConfig) {
 	const accessToken = getLocalStorage(ACCESS_TOKEN_KEY);
@@ -33,3 +33,24 @@ export default async function requester<Payload>(option: AxiosRequestConfig) {
 		payload: response.data,
 	};
 }
+
+axiosInstance.interceptors.request.use(
+	function (config) {
+		return config;
+	},
+	function (error) {
+		return Promise.reject(error);
+	},
+);
+
+axiosInstance.interceptors.response.use(
+	function (response) {
+		return response;
+	},
+	function (error) {
+		if (error.response.status === 401) {
+			window.location.replace('/');
+		}
+		return Promise.reject(error);
+	},
+);
