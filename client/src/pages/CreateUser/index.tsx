@@ -24,6 +24,8 @@ const CreateUser = () => {
 			const response = await onAddUser(userInfo);
 			const settingResponse = await onAddSetting(userSetting);
 			if (response && settingResponse) {
+				const { uuid, id } = response.user;
+				navigate(`users/${uuid}/${id}`, { replace: true });
 			}
 		}
 	};
@@ -83,7 +85,10 @@ const CreateUser = () => {
 	return (
 		<Layout>
 			<h1 className="text-2xl pb-8">신규 사용자 정보 등록</h1>
-			<form onSubmit={onSubmit}>
+			<form
+				onSubmit={onSubmit}
+				// className="grid grid-cols-[minmax(150px,_0.5fr)_minmax(300px,_1fr)_minmax(150px,_0.5fr)_minmax(300px,_1fr)] "
+			>
 				<section className="grid gap-2">
 					<UserInput name="photo" id="photo" type="file" accept="image/*" onChange={onChange}>
 						사용자 프로필
@@ -117,44 +122,46 @@ const CreateUser = () => {
 						이메일
 					</UserInput>
 				</section>
-				<section className="grid gap-2 pt-3">
-					<UserRadio
-						id="allowMarketing"
-						name="allow_marketing_push"
-						trueId="marketingAllow"
-						falseId="marketingNotAllow"
-						onChange={onChange}
-					>
-						마케팅 정보 수신 동의 여부
-					</UserRadio>
-					<UserRadio id="allowInvest" name="allow_invest_push" trueId="investAllow" falseId="investNotAllow" onChange={onChange}>
-						투자 정보 수신 동의 여부
-					</UserRadio>
-					<UserRadio
-						id="isActive"
-						name="is_active"
-						trueLabel="활성화"
-						falseLabel="비활성화"
-						trueId="active"
-						falseId="unActive"
-						onChange={onChange}
-					>
-						활성화 여부
-					</UserRadio>
-					<UserRadio
-						id="isStaff"
-						name="is_staff"
-						trueLabel="임직원"
-						falseLabel="해당 없음"
-						trueId="staff"
-						falseId="notStaff"
-						onChange={onChange}
-					>
-						임직원 여부
-					</UserRadio>
-				</section>
-				<section className="flex justify-end px-[16px]">
-					<button type="submit">저장</button>
+				{/* <section className="grid gap-2 pt-3 pb-3"> */}
+				<UserRadio
+					id="allowMarketing"
+					name="allow_marketing_push"
+					trueId="marketingAllow"
+					falseId="marketingNotAllow"
+					onChange={onChange}
+				>
+					마케팅 정보 수신 동의 여부
+				</UserRadio>
+				<UserRadio id="allowInvest" name="allow_invest_push" trueId="investAllow" falseId="investNotAllow" onChange={onChange}>
+					투자 정보 수신 동의 여부
+				</UserRadio>
+				<UserRadio
+					id="isActive"
+					name="is_active"
+					trueLabel="활성화"
+					falseLabel="비활성화"
+					trueId="active"
+					falseId="unActive"
+					onChange={onChange}
+				>
+					활성화 여부
+				</UserRadio>
+				<UserRadio
+					id="isStaff"
+					name="is_staff"
+					trueLabel="임직원"
+					falseLabel="해당 없음"
+					trueId="staff"
+					falseId="notStaff"
+					onChange={onChange}
+				>
+					임직원 여부
+				</UserRadio>
+				{/* </section> */}
+				<section className="flex justify-end px-[16px] pt-4">
+					<button className="h-10 w-12 rounded bg-[#041527] text-white font-bold" type="submit">
+						저장
+					</button>
 				</section>
 			</form>
 		</Layout>
