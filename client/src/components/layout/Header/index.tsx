@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 const pathToPageDescription: { [path: string]: string } = {
 	'/accounts': '계좌 목록',
 	'/users': '고객 목록',
+	'/users/post-user': '고객 생성',
 } as const;
 
 const Header = () => {

@@ -18,11 +18,12 @@ const UserInput = (
 ) => {
 	return (
 		<div className="flex">
-			<label htmlFor={id} className="w-[200px] mb-[6px]">
+			<label htmlFor={id} className="w-[150px] mb-[6px] flex items-center">
 				{children}
 			</label>
 			<input
-				className={`border-solid border-2 border-slate-400 ${width}`}
+				required
+				className={`border-solid border-2 rounded-md border-slate-400 ${width} p-2`}
 				ref={ref}
 				name={name}
 				id={id}
