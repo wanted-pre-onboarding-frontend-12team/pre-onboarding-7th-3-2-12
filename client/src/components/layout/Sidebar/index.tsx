@@ -19,7 +19,7 @@ const Sidebar = () => {
 		const confirm = window.confirm('로그아웃 하시겠습니까?');
 		if (confirm) {
 			removeLocalStorageItem(ACCESS_TOKEN_KEY);
-			window.location.reload;
+			window.location.reload();
 		}
 	};
 
