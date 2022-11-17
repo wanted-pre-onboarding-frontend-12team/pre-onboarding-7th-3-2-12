@@ -41,6 +41,8 @@ export type AccountResponseDTO = {
 	id: number;
 	user_id: number;
 	uuid: string;
+	user_name: string;
+	user_uuid: string;
 	broker_id: Broker_id;
 	status: Status;
 	number: string;

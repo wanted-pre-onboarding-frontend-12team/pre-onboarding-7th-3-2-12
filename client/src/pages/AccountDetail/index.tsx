@@ -1,4 +1,4 @@
-import { useParams, Params } from 'react-router-dom';
+import { useParams, Params, Link } from 'react-router-dom';
 import { Layout } from '@src/components';
 import useAccountDetail from '@src/hooks/useAccountDetail';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
@@ -27,7 +27,12 @@ const AccountDetail = () => {
 						)}
 
 						<div className="flex flex-col rounded-3xl w-full space-y-10 pl-5 mt-14 bg-white">
-							<p className="font-bold text-xl underline underline-offset-2  cursor-pointer"> 김*현 님의 계좌 </p>
+							<Link
+								to={`/users/${accountDetail[0].user_uuid}/${accountDetail[0].user_id}`}
+								className="font-bold text-xl underline underline-offset-2  cursor-pointer"
+							>
+								{accountDetail[0].user_name} 님의 계좌
+							</Link>
 							<p className="text-xl cursor-pointer">{accountStatusTable.BrokerTable[accountDetail[0].broker_id]}</p>
 							<p className="text-xl cursor-pointer">{maskingAccount(accountDetail[0].number)}</p>
 							<p className="font-bold text-4xl"> {numberWithCommasConverter(accountDetail[0].assets)} 원 </p>
