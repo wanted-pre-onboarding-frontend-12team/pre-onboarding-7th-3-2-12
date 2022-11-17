@@ -1,10 +1,9 @@
+import Layout from '@src/components/layout';
+import { onAddSetting, onAddUser } from '@src/core/apis/user';
 import React, { useRef, useState, useEffect } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { useNavigate } from 'react-router-dom';
-import { onAddSetting, onAddUser } from '../../../apis/user';
-import { SignInResponseDTO } from '../../../types/api';
-import { makeUUID } from '../../../utils/makeUUID';
-import useUserStore from '../../../utils/useUserStore';
+import { makeUUID } from '@src/utils/makeUUID';
 import UserInput from './UserInput';
 import UserRadio from './UserRadio';
 import UserSelect from './UserSelect';
@@ -17,7 +16,6 @@ const CreateUser = () => {
 	const open = useDaumPostcodePopup();
 	const addressRef = useRef<HTMLInputElement>(null);
 	const navigate = useNavigate();
-	const store = useUserStore((state) => state);
 
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -25,16 +23,7 @@ const CreateUser = () => {
 		if (window.confirm(SAVE_MESSAGE)) {
 			const response = await onAddUser(userInfo);
 			const settingResponse = await onAddSetting(userSetting);
-			if (response) {
-				store.setUser(response.user);
-			}
-			if (settingResponse) {
-				console.log(settingResponse);
-				store.setUserSetting(settingResponse);
-				console.log('store user..  ');
-				console.log(store.user);
-				console.log(store.userSetting);
-				navigate(`/uuid`);
+			if (response && settingResponse) {
 			}
 		}
 	};
@@ -57,11 +46,6 @@ const CreateUser = () => {
 	const onSelctChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const { name, value } = e.currentTarget;
 		setUserInfo({ ...userInfo, [name]: value });
-	};
-
-	const onCancle = () => {
-		setUserInfo({});
-		setUserSetting({});
 	};
 
 	const onPostClick = () => {
@@ -97,8 +81,8 @@ const CreateUser = () => {
 	}, [uuid]);
 
 	return (
-		<section className="p-[16px]">
-			<h1 className="text-xl">신규 사용자 정보 등록</h1>
+		<Layout>
+			<h1 className="text-2xl pb-8">신규 사용자 정보 등록</h1>
 			<form onSubmit={onSubmit}>
 				<section className="grid gap-2">
 					<UserInput name="photo" id="photo" type="file" accept="image/*" onChange={onChange}>
@@ -173,7 +157,7 @@ const CreateUser = () => {
 					<button type="submit">저장</button>
 				</section>
 			</form>
-		</section>
+		</Layout>
 	);
 };
 
