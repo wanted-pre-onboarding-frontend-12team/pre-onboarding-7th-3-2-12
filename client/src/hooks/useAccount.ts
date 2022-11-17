@@ -20,8 +20,6 @@ const useAccount = (currentPage: number, search: string, accountFilterObj: Props
 
 	const totalPage = useMemo(() => allAccounts && Math.ceil(allAccounts.length / 14), [allAccounts]);
 
-	console.log(accountFilterObj);
-
 	return { accounts, totalPage };
 };
 
