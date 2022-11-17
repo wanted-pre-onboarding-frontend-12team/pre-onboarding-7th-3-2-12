@@ -3,16 +3,17 @@ import { AccountGrid, DropDown, Layout, SearchInput } from '@src/components';
 import useAccount from '@src/hooks/useAccount';
 import Pagenation from '@src/components/shared/Pagenation';
 import { dropDownTable } from '@src/constants/dropDown';
-import useAccountStore from '@src/zustand/useAccountStore';
 
 const Account = () => {
 	const [searchKeyword, setSearchKeyword] = useState('');
 	const [currentPage, setCurrentPage] = useState(1);
-	const store = useAccountStore((state) => state);
-	const selectedBroker = store.broker;
-	const selectedActive = store.active;
-	const selectedStatus = store.status;
-	const { accounts, totalPage } = useAccount(currentPage, selectedBroker, selectedActive, selectedStatus, searchKeyword);
+	const [accountFilterObj, setAccountFilterObj] = useState({
+		accountBroker: '',
+		accountStatus: '',
+		accountActive: '',
+	});
+
+	const { accounts, totalPage } = useAccount(currentPage, searchKeyword, accountFilterObj);
 
 	const handlePagenationChange = (newPage: number) => {
 		setCurrentPage(newPage);
@@ -22,14 +23,30 @@ const Account = () => {
 		setSearchKeyword(keyword);
 	};
 
+	const handleDropdownFilterChange = (value: string, changeTarget: string) => {
+		setAccountFilterObj({ ...accountFilterObj, [changeTarget]: value });
+	};
+
 	return (
 		<Layout>
 			<main className="p-8">
 				<div className="flex justify-between">
 					<div>
-						<DropDown dropdownTarget="broker" options={dropDownTable.BrokerDropDown} onDropdownChange={() => {}} />
-						<DropDown dropdownTarget="status" options={dropDownTable.SatusDropDown} onDropdownChange={() => {}}/>
-						<DropDown dropdownTarget="active" options={dropDownTable.ActiveDropDown} onDropdownChange={() => {}}/>
+						<DropDown
+							dropdownTarget="accountBroker"
+							options={dropDownTable.AccountBrokerIdOptions}
+							onDropdownChange={handleDropdownFilterChange}
+						/>
+						<DropDown
+							dropdownTarget="accountStatus"
+							options={dropDownTable.AccountStatusOptions}
+							onDropdownChange={handleDropdownFilterChange}
+						/>
+						<DropDown
+							dropdownTarget="accountActive"
+							options={dropDownTable.AccountActiveOptions}
+							onDropdownChange={handleDropdownFilterChange}
+						/>
 					</div>
 					<SearchInput onSearchByKeyword={handleSearchByKeyword} />
 				</div>

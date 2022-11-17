@@ -54,6 +54,8 @@ for (let i = 1; i < 101; i++) {
     const account = {
       id: acc_id++,
       user_id: i,
+      user_name: "",
+      user_uuid: "",
       uuid: faker.datatype.uuid(),
       broker_id: accountBrokerCode,
       status,
@@ -65,7 +67,14 @@ for (let i = 1; i < 101; i++) {
       created_at: faker.date.between("2019-04-01", "2022-08-01"),
       updated_at: faker.date.between("2019-04-01", "2022-08-01"),
     };
+
     accounts.push(account);
+    for (let k = -1; k < Math.max(account.id - 1); k++) {
+      if (user.id === account.user_id) {
+        account.user_name = user.name;
+        account.user_uuid = user.uuid;
+      }
+    }
   }
 }
 
