@@ -40,22 +40,22 @@ export type UserSettingResponseDTO = {
 export type UserObject = {
 	id: number;
 	uuid: string;
-	photo: string;
+	photo?: string;
 	name: string;
 	email: string;
-	age: number;
-	gender_origin: 1 | 2 | 3 | 4;
-	birth_date: string;
-	phone_number: string;
-	address: string;
-	detail_address: string;
-	last_login: string;
-	allow_marketing_push: boolean;
-	allow_invest_push: boolean;
-	is_active: boolean;
-	is_staff: boolean;
-	created_at: string;
-	updated_at: string;
+	age?: number;
+	gender_origin?: 1 | 2 | 3 | 4;
+	birth_date?: string;
+	phone_number?: string;
+	address?: string;
+	detail_address?: string;
+	last_login?: string;
+	allow_marketing_push?: boolean;
+	allow_invest_push?: boolean;
+	is_active?: boolean;
+	is_staff?: boolean;
+	created_at?: string;
+	updated_at?: string;
 };
 
 export type AccountResponseDTO = {

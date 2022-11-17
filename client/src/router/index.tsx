@@ -1,10 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
-import { Login, DashBoard, Users, Account, AccountDetail } from '@src/pages';
+import { Login, DashBoard, Users, Account, AccountDetail, DetailUser, CreateUser } from '@src/pages';
 import PrivateRoute from '@src/router/privateRouter';
 import { ROUTE_PATH, PRIVATE_PATH } from '@src/router/routePath';
 import { isValidArray } from '@src/utils/isValidArray';
-import DetailUser from '@src/components/feature/DetailUser';
-import CreateUser from '@src/components/feature/CreateUser';
 
 const routes = [
 	{ id: 1, path: ROUTE_PATH.DASHBOARD, element: <DashBoard /> },

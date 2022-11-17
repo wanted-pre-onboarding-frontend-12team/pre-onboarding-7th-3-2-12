@@ -1,5 +1,5 @@
 import Layout from '@src/components/layout';
-import { getUser, getUserSetting, updateUserName } from '@src/core/apis/user';
+import { updateUserName } from '@src/core/apis/user';
 import { UserObject, UserResponseDTO, UserSettingResponseDTO } from '@src/types/api';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useRef, useState } from 'react';
@@ -7,16 +7,17 @@ import { useParams } from 'react-router-dom';
 import useUserAccounts from '@src/hooks/useUserAccounts';
 import UserInfo from '@src/components/feature/UserInfo';
 import { AccountGrid } from '@src/components';
+import useUser from '@src/hooks/useUser';
+import useUserSetting from '@src/hooks/useUserSetting';
 
 const DetailUser = () => {
 	const [info, setInfo] = useState<UserObject>();
 	const [editMode, setEditMode] = useState<boolean>(false);
 	const { uuid, id } = useParams<string>();
 	const { userAccounts } = useUserAccounts(Number(id));
-	const { data: userData } = useQuery<UserResponseDTO[]>(['getUser'], async () => getUser(uuid as string));
-	const { data: userSettingData } = useQuery<UserSettingResponseDTO[]>(['getUserSetting', uuid], async () =>
-		getUserSetting(uuid as string),
-	);
+	const { userData } = useUser(uuid as string);
+	const { userSettingData } = useUserSetting(uuid as string);
+
 	const ref = useRef<HTMLInputElement>(null);
 	const QueryClient = useQueryClient();
 	const updateName = useMutation(updateUserName, {
@@ -41,7 +42,7 @@ const DetailUser = () => {
 
 	useEffect(() => {
 		if (userData && userSettingData) {
-			setInfo(Object.assign(userSettingData[0], ...userData));
+			setInfo(Object.assign({}, ...userSettingData, ...userData));
 		}
 	}, [userData, userSettingData]);
 
