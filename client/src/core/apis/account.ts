@@ -48,3 +48,16 @@ export const getAccountDetail = async (id: number) => {
 
 	return payload;
 };
+
+export const getUserAccounts = async (user_id: number) => {
+	const {
+		user: { accounts },
+	} = API_PATH;
+
+	const { headers, status, payload } = await requester<AccountResponseDTO[]>({
+		method: httpMehthod.GET,
+		url: `${accounts}?user_id=${user_id}`,
+	});
+
+	return payload;
+};
