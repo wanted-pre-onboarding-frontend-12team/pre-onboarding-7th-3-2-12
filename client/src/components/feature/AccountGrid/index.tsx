@@ -23,7 +23,6 @@ const AccountGrid = ({ accountList }: { accountList: AccountResponseDTO[] | unde
 					{accountList?.map((item: AccountResponseDTO) => {
 						const isGain =
 							item.assets > item.payments ? 'text-red-800' : item.assets < item.payments ? 'text-blue-800' : 'text-black';
-						console.log(accountList);
 
 						return (
 							<React.Fragment key={item.id}>
