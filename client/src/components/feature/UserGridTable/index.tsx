@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@src/components';
-import { UserResponseDTO } from '@src/types/api';
+import { FullInfoUser, UserResponseDTO } from '@src/types/api';
 import { isValidArray } from '@src/utils/isValidArray';
 import { nameMasker, phoneNumberMasker, dateISOStringToFullDay, genderCodeToGender } from '@src/core/adminDataConverter';
 
 type Props = {
 	tableHeadTrs: string[];
-	tableBodyList: UserResponseDTO[] | undefined;
+	tableBodyList: FullInfoUser[] | undefined;
 };
 
 const UserGridTable = (props: Props) => {
@@ -28,10 +28,10 @@ const UserGridTable = (props: Props) => {
 				})}
 			{isValidArray(props.tableBodyList) &&
 				props.tableBodyList?.map((tableBodyItem) => {
-					const { id, uuid, name, gender_origin, birth_date, email, phone_number, created_at, last_login } = tableBodyItem;
+					const { id, uuid, name, gender_origin, birth_date, email, phone_number, created_at, last_login, is_active, allow_marketing_push, account_count } = tableBodyItem;
 
 					return (
-						<React.Fragment key={uuid}>
+						<React.Fragment key={id}>
 							<li className="flex items-center justify-center px-4 py-2 text-center bg-white border border-gray-300 border-solid">
 								<Link to={`/users/${uuid}/${id}`} className="border-b-2 border-black hover:text-blue-500 hover:border-blue-500">
 									{name && nameMasker(name)}
@@ -50,16 +50,16 @@ const UserGridTable = (props: Props) => {
 								{phone_number && phoneNumberMasker(phone_number)}
 							</li>
 							<li className="flex items-center justify-center px-4 py-2 text-center bg-white border border-gray-300 border-solid">
-								{'⭕️'}
+								{allow_marketing_push ? '⭕️' : '❌'}
 							</li>
 							<li className="flex items-center justify-center px-4 py-2 text-center bg-white border border-gray-300 border-solid">
-								{'❌'}
+								{is_active ? '⭕️' : '❌'}
 							</li>
 							<li className="flex items-center justify-center px-4 py-2 text-center bg-white border border-gray-300 border-solid">
 								{created_at && dateISOStringToFullDay(created_at)}
 							</li>
 							<li className="flex items-center justify-center px-4 py-2 text-center bg-white border border-gray-300 border-solid">
-								{'2'}
+								{account_count}
 							</li>
 							<li className="flex items-center justify-center px-4 py-2 text-center bg-white border border-gray-300 border-solid">
 								{last_login && dateISOStringToFullDay(last_login)}

@@ -1,9 +1,11 @@
-import { DropDown, Layout, Pagenation, SearchInput, UserGridTable } from '@src/components';
-import { getUsers, getUsersByPagenation } from '@src/core/apis/user';
-import { UserResponseDTO } from '@src/types/api';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { DropDown, Layout, Pagenation, SearchInput, UserGridTable } from '@src/components';
+import { getUserAll } from '@src/core/apis/user';
+import { generateFullInfoUsers } from '@src/core/userService';
+import { FullInfoUser, UserResponseDTO } from '@src/types/api';
+import { generateQueryString } from '@src/utils/stringUtils';
 
 const tableHeadTrs = [
 	'고객명',
@@ -59,13 +61,24 @@ const PAGE_OFFSET = 20;
 const DEFALUT_PAGE = 1;
 
 const Users = () => {
-	const [currentPage, setCurrentPage] = useState(DEFALUT_PAGE);
+	const [fullInfoUsers, setFullInfoUsers] = useState<FullInfoUser[]>();
 	const [searchKeyword, setSearchKeyword] = useState('');
-	const { data: users } = useQuery<UserResponseDTO[]>(['getUsers', searchKeyword], async () => getUsers(searchKeyword || null));
-	const { data: currentUsers } = useQuery<UserResponseDTO[]>(['getUsersByPagenation', currentPage], async () =>
-		getUsersByPagenation(currentPage, PAGE_OFFSET),
+	const [currentPage, setCurrentPage] = useState(DEFALUT_PAGE);
+	const [userSettingFilter, setUserSettingFilter] = useState({
+		is_active_like: '',
+		is_staff_like: '',
+	});
+
+	const { data: users } = useQuery<UserResponseDTO[]>(
+		['getUserAll', searchKeyword, userSettingFilter],
+		async () => getUserAll(generateQueryString({ q: searchKeyword })) || null,
+		{
+			onSuccess: async (data) => {
+				const newFullInfoUsers = await generateFullInfoUsers(data, userSettingFilter);
+				setFullInfoUsers(newFullInfoUsers);
+			},
+		},
 	);
-	const totalPage = useMemo(() => users && Math.ceil(users.length / PAGE_OFFSET), [users]);
 
 	const handlePagenationChange = (newPage: number) => {
 		setCurrentPage(newPage);
@@ -75,13 +88,8 @@ const Users = () => {
 		setSearchKeyword(keyword);
 	};
 
-	const [dropdownObj, setDropdownObj] = useState({
-		userActive: '',
-		userStaff: '',
-	});
-
-	const handleDropdownFilterChange = (value: string, changeTarget: string) => {
-		setDropdownObj({ ...dropdownObj, [changeTarget]: value });
+	const handleUserSettingFilterChange = (value: string, changeTarget: string) => {
+		setUserSettingFilter({ ...userSettingFilter, [changeTarget]: value });
 	};
 
 	return (
@@ -96,19 +104,22 @@ const Users = () => {
 					</Link>
 				</div>
 				<div className="flex items-center">
-					<DropDown dropdownTarget="userActive" options={isActiveOptions} onDropdownChange={handleDropdownFilterChange} />
-					<DropDown dropdownTarget="userStaff" options={isStaffOptions} onDropdownChange={handleDropdownFilterChange} />
+					<DropDown dropdownTarget="is_active_like" options={isActiveOptions} onDropdownChange={handleUserSettingFilterChange} />
+					<DropDown dropdownTarget="is_staff_like" options={isStaffOptions} onDropdownChange={handleUserSettingFilterChange} />
 					<SearchInput onSearchByKeyword={handleSearchByKeyword} />
 				</div>
 			</div>
 
-			<UserGridTable tableHeadTrs={tableHeadTrs} tableBodyList={searchKeyword ? users : currentUsers} />
+			<UserGridTable
+				tableHeadTrs={tableHeadTrs}
+				tableBodyList={fullInfoUsers?.slice((currentPage - 1) * PAGE_OFFSET, currentPage * PAGE_OFFSET)}
+			/>
 			<Pagenation
 				searchKeyword={searchKeyword}
 				setCurrentPage={setCurrentPage}
-				filterObj={dropdownObj}
+				filterObj={userSettingFilter}
 				currentPage={currentPage}
-				totalPage={totalPage ?? DEFALUT_PAGE}
+				totalPage={(fullInfoUsers && Math.ceil(fullInfoUsers.length / PAGE_OFFSET)) ?? DEFALUT_PAGE}
 				onPagenationChange={handlePagenationChange}
 			/>
 		</Layout>

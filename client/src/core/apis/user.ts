@@ -2,14 +2,14 @@ import { API_PATH, httpMehthod } from '@src/core/apis/common';
 import requester from '@src/core/apis/requester';
 import { UserObject, UserResponseDTO, UserSettingResponseDTO } from '@src/types/api';
 
-export const getUsers = async (query: string | null) => {
+export const getUserAll = async (query: string | null) => {
 	const {
 		user: { users },
 	} = API_PATH;
 
 	const { headers, status, payload } = await requester<UserResponseDTO[]>({
 		method: httpMehthod.GET,
-		url: `${users}${query ? `?q=${query}` : ''}`,
+		url: `${users}${query}`,
 	});
 
 	return payload;
@@ -59,6 +59,19 @@ type userInfo = {};
 type UserResponse = {
 	accessToken: string;
 	user: UserObject;
+};
+
+export const getUserSettingAll = async (query: string | null) => {
+	const {
+		user: { setting },
+	} = API_PATH;
+
+	const { payload } = await requester<UserSettingResponseDTO[]>({
+		method: httpMehthod.GET,
+		url: `${setting}${query}`,
+	});
+
+	return payload;
 };
 
 export const onAddUser = async ({ ...props }: userInfo) => {
