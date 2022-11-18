@@ -58,6 +58,12 @@ export type UserObject = {
 	updated_at?: string;
 };
 
+export interface FullInfoUser extends UserObject {
+	user_setting_id: number;
+	user_accounts: AccountResponseDTO[];
+	account_count: number;
+}
+
 export type AccountResponseDTO = {
 	id: number;
 	user_id: number;

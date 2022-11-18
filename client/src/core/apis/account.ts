@@ -74,3 +74,14 @@ export const updateAccountList = async (id: number, username: string) => {
 	});
 	return payload;
 };
+
+export const deleteAccountById = async (accountId: number) => {
+	const {
+		user: { accounts },
+	} = API_PATH;
+
+	requester({
+		method: httpMehthod.DELETE,
+		url: `${accounts}/${accountId}`,
+	});
+};

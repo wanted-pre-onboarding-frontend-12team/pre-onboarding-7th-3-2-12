@@ -2,6 +2,7 @@ export const httpMehthod = {
 	GET: 'GET',
 	POST: 'POST',
 	PATCH: 'PATCH',
+	DELETE: 'DELETE',
 } as const;
 
 export const httpStatusCode = {

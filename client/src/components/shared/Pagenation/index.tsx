@@ -41,7 +41,6 @@ const Pagenation = (props: Props) => {
 			for (let i = startPage; i < endPage + 1; i++) {
 				array.push(i);
 			}
-			console.log(array);
 			return array;
 		},
 		[endPage, startPage],
@@ -58,19 +57,22 @@ const Pagenation = (props: Props) => {
 				type="button"
 				data-page={INITAL_PAGE}
 				disabled={props.currentPage === 1}
-				className="hover:text-blue-25 disabled:opacity-50"
+				className="hover:text-blue-500 disabled:opacity-50 disabled:hover:text-slate-600"
 				onClick={(e) => {
 					handlePagenationClick(e);
 					setStartPage(INITAL_PAGE);
-					if (props.totalPage < PagePerView) setEndPage(props.totalPage);
-					setEndPage(PagePerView);
+					if (props.totalPage < PagePerView) {
+						setEndPage(props.totalPage);
+					} else {
+						setEndPage(PagePerView);
+					}
 				}}
 			>{`<<`}</Button>
 			<Button
 				type="button"
 				data-page={props.currentPage - 1}
 				disabled={props.currentPage === 1}
-				className="hover:text-blue-500 disabled:opacity-50"
+				className="px-4 py-2 hover:text-blue-500 disabled:opacity-50 disabled:hover:text-slate-600"
 				onClick={(e) => {
 					handlePagenationClick(e);
 					if (props.currentPage % PagePerView === 1) {
@@ -99,7 +101,7 @@ const Pagenation = (props: Props) => {
 				type="button"
 				data-page={props.currentPage + 1}
 				disabled={props.currentPage === props.totalPage}
-				className="hover:text-blue-500 disabled:opacity-25"
+				className="px-4 py-2 hover:text-blue-500 disabled:opacity-25 disabled:hover:text-slate-600"
 				onClick={(e) => {
 					handlePagenationClick(e);
 					if (props.currentPage % PagePerView === 0) {
@@ -117,7 +119,7 @@ const Pagenation = (props: Props) => {
 				type="button"
 				data-page={props.totalPage}
 				disabled={props.currentPage === props.totalPage}
-				className="hover:text-blue-500 disabled:opacity-25"
+				className="hover:text-blue-500 disabled:opacity-50 disabled:hover:text-slate-600"
 				onClick={(e) => {
 					handlePagenationClick(e);
 					setEndPage(props.totalPage);
