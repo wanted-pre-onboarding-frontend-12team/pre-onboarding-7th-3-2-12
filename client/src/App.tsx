@@ -1,4 +1,6 @@
+import Router from './router/index';
+
 const App = () => {
-	return <div className="text-orange-700">App</div>;
+	return <Router />;
 };
 export default App;
