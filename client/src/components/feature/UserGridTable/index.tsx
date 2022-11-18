@@ -8,6 +8,7 @@ import { nameMasker, phoneNumberMasker, dateISOStringToFullDay, genderCodeToGend
 type Props = {
 	tableHeadTrs: string[];
 	tableBodyList: FullInfoUser[] | undefined;
+	onUserDelete: (targetUserId: number) => void;
 };
 
 const UserGridTable = (props: Props) => {
@@ -67,7 +68,7 @@ const UserGridTable = (props: Props) => {
 							<li className="flex items-center justify-center px-4 py-2 text-center bg-white border border-gray-300 border-solid ">
 								<Button
 									type="button"
-									onClick={() => console.log('삭제')}
+									onClick={() => props.onUserDelete(id)}
 									className="px-6 py-1 text-white bg-red-600 rounded-md opacity-80 hover:opacity-100"
 								>
 									삭제

@@ -59,6 +59,8 @@ export type UserObject = {
 };
 
 export interface FullInfoUser extends UserObject {
+	user_setting_id: number;
+	user_accounts: AccountResponseDTO[];
 	account_count: number;
 }
 

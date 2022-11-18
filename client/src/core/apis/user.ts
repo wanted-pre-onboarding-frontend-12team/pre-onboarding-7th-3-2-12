@@ -132,3 +132,25 @@ export const updateAccountName = async ({ id, name }: Props) => {
 	});
 	return payload;
 };
+
+export const deleteUserById = async (userId: number) => {
+	const {
+		user: { users },
+	} = API_PATH;
+
+	requester({
+		method: httpMehthod.DELETE,
+		url: `${users}/${userId}`,
+	});
+};
+
+export const deleteUserSettingById = async (userSettingId: number) => {
+	const {
+		user: { setting },
+	} = API_PATH;
+
+	requester({
+		method: httpMehthod.DELETE,
+		url: `${setting}/${userSettingId}`,
+	});
+};
