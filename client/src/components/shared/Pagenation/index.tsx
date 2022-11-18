@@ -41,7 +41,6 @@ const Pagenation = (props: Props) => {
 			for (let i = startPage; i < endPage + 1; i++) {
 				array.push(i);
 			}
-			console.log(array);
 			return array;
 		},
 		[endPage, startPage],
